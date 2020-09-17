@@ -3,6 +3,8 @@
 #     are made based on assumption that the most important is to have correctly connected links in a navigation bar,
 #     don't focus on other links that links to the navigation bar (even index.html contains a link to this .html file in a subfolder).
 #     don't focus on using .css file.
+#     don't focus on special settings of files (e.g. in _site.yml)
+#   If changes in this file _preparationSubFolders.R are made, I had to use e.g. GitHub Desktop (workflowr is not usable/I didn't test it properly, yet)?
 
 # step 1 - build a basic workflowr web pages
 base::setwd("D:/Cloud/Sync/Study/Programming/R/Work/Projects/GitHub")
@@ -57,5 +59,13 @@ base::file.copy("./analysis/subPages/aboutSubPages.html", "./docs/subPages", ove
 # rebuild if necessary, in this case
 workflowr::wflow_build("./analysis/index.Rmd")
 
-# step 6 - commit/publish/push
+# step 6 - commit/publish, push
 workflowr::wflow_publish(".", "commit text: initial publish")  # 1stly ensure that correct working directory is set
+workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")  # choose 1 to create repository "workflowrSubfolders" automatically -> sign-in in loaded web browser to authenticate
+workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
+
+# step 7 - prepare GitHub Pages
+# If needed: GitHub Settings for GitHub Pages.
+# Also all workflowr checks are OK.
+# https://learnusezone.github.io/workflowrSubfolders/index.html is ready.
+
