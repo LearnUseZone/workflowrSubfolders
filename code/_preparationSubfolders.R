@@ -7,9 +7,10 @@
 #  Folder "workflowr project directory/code": This directory is for code that might not be appropriate to include
 #    in R Markdown format (e.g. for pre-processing the data, or for long-running code). [https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html]
 #    For organizational purposes: don't write save .Rmd files here, create suitable subfolders here. [me]
-#  Create "workflowr project directory/analysis/codeRmd" folder (with further additional folder names that are same as "workflowr project directory/code" subfolder names)
+#  Create "workflowr project directory/codeRmd" folder (with further additional folder names that are same as "workflowr project directory/code" subfolder names)
 #    for .Rmd files for relevant "workflowr project directory/code" subfolders. [me]
-
+#    Important: Don't use "analysis/codeRmd" otherwise following error pops-up when using workflowr::wflow_publish(...)
+#      Error in to_html(files_analysis, outdir = o$docs) : Invalid file extension
 
 # step 2 - ensure that ./analysis is the working directory
 
@@ -54,17 +55,17 @@ wflow_build_dir()
 
 # step 5 - at this point
 #   - folder "code" contains subfolders with (e.g.) development codes, ...
-#   - folder "analysis/codeRmd" contains subfolders with .Rmd files associated with development codes, ...
+#   - folder "codeRmd" contains subfolders with .Rmd files associated with development codes, ...
 #   - more efficient way (less manual work) of creating .html files is prepared in comparison with steps on 19-09-17
 #     plus a potential problem with the workflowr reproducibility checks [https://github.com/jdblischak/workflowr/issues/220#issuecomment-694924738] could be resolved.
-#   - folder "docs" contains .html files created from .Rmd files from folder "analysis/codeRmd" but I'd like to have them in an appropriate subfolders instead of using delimiters like "--"
+#   - folder "docs" contains .html files created from .Rmd files from folder "codeRmd" but I'd like to have them in an appropriate subfolders instead of using delimiters like "--"
 #     so that means similar steps like on 19-09-17 in "step 4" and "step 5" should be applied or I need to live with using of delimiters like "--"
 #       - I think to simply live with that because I critical is to have perfectly organized .Rmd files rather than .html files
 #   - keep in mind to use correct hyperlinks to future .html files (this shouldn't be a problem)
 
 # step 6 - commit/publish, push
 base::setwd("../")  # set workflowr project as the working directory
-workflowr::wflow_publish(".", "updated and replaced preparation file, deleting examples from 20-09-19, new examples based on issues/95")  # 1stly ensure that correct working directory is set
+workflowr::wflow_publish(".", "small updates in '_preparationSubfolders.R'")  # 1stly ensure that correct working directory is set
 workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")  # choose 1 to create repository "workflowrSubfolders" automatically -> sign-in in loaded web browser to authenticate
 workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 
