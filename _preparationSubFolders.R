@@ -1,3 +1,6 @@
+# 20-09-17
+# my original steps pointed out at https://github.com/jdblischak/workflowr/issues/220#issue-703624867
+# ----
 # initial notes
 #   Following steps
 #     are made based on assumption that the most important is to have correctly connected links in a navigation bar,
