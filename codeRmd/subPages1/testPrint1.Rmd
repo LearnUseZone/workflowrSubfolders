@@ -1,0 +1,16 @@
+---
+title: "About SubPages"
+output:
+  workflowr::wflow_html:
+    toc: false
+editor_options:
+  chunk_output_type: console
+---
+
+This file in folder "subPages1" is for testing of half manual/automated workaround
+to use package workflowr and sub-folders in folder "analysis".
+
+call function from another file
+```{r}
+source("D:/Cloud/Sync/Study/Programming/R/Work/Projects/GitHub/workflowrSubfolders/code/subPages1/print1.R")
+```
