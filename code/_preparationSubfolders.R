@@ -60,7 +60,7 @@ wflow_build_dir()
 #     plus a potential problem with the workflowr reproducibility checks [https://github.com/jdblischak/workflowr/issues/220#issuecomment-694924738] could be resolved.
 #   - folder "docs" contains .html files created from .Rmd files from folder "codeRmd" but I'd like to have them in an appropriate subfolders instead of using delimiters like "--"
 #     so that means similar steps like on 19-09-17 in "step 4" and "step 5" should be applied or I need to live with using of delimiters like "--"
-#       - I think to simply live with that because I critical is to have perfectly organized .Rmd files rather than .html files
+#       - I think to simply live with that because I critical is to have perfectly organized .Rmd files rather than .html files because workflowr will basically take care about these .html files.
 #   - keep in mind to use correct hyperlinks to future .html files (this shouldn't be a problem)
 
 # step 6 - commit/publish, push
