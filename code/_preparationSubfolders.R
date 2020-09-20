@@ -65,7 +65,7 @@ wflow_build_dir()
 
 # step 6 - commit/publish, push
 base::setwd("../")  # set workflowr project as the working directory
-workflowr::wflow_publish(".", "better notes for wflow_use_github()")  # 1stly ensure that correct working directory is set
+workflowr::wflow_publish(".", "adding spaces before and after assignment operators")  # 1stly ensure that correct working directory is set
 workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")  # choose 1 to create repository "workflowrSubfolders" automatically -> sign-in in loaded web browser to authenticate
 workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 
