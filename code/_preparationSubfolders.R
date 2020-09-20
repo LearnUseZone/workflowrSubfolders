@@ -24,7 +24,7 @@ generate_rmd <- function(path, alias, dir) {
     yaml::as.yaml(rmarkdown::yaml_front_matter(abs.path)),  # yaml header from original .Rmd file
     "---\n\n",
     # "**Source file\\:** ", path, "\n\n",  # link to original .Rmd file; update (it's commented) of issues/95
-    "```{r child='", abs.path, "'}\n```",   # code (not yaml header) of original .Rmd file
+    "```{r child = '", abs.path, "'}\n```",   # code (not yaml header) of original .Rmd file
     sep = "",
     file = alias  # where a file will be created
   )
@@ -65,7 +65,7 @@ wflow_build_dir()
 
 # step 6 - commit/publish, push
 base::setwd("../")  # set workflowr project as the working directory
-workflowr::wflow_publish(".", "adding spaces before and after assignment operators")  # 1stly ensure that correct working directory is set
-workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")  # choose 1 to create repository "workflowrSubfolders" automatically -> sign-in in loaded web browser to authenticate
+workflowr::wflow_publish(".", "better notes for wflow_use_github()")  # 1stly ensure that correct working directory is set
+workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")    # choose 1 to create a remote repository automatically -> sign-in in loaded web browser to authenticate; choose 2 if a remote repository is already created
 workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 
