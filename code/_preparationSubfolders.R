@@ -16,25 +16,25 @@
 
 # step 3 - execute generate_rmd() and wflow_build_dir()
 #   edited codes from https://github.com/jdblischak/workflowr/issues/95#issuecomment-360094662
-generate_rmd<-function(path, alias, dir) {
-  path<-base::paste0(dir, '/', path)
-  abs.path<-tools::file_path_as_absolute(paste0('../', path))
+generate_rmd <- function(path, alias, dir) {
+  path <- base::paste0(dir, '/', path)
+  abs.path <- tools::file_path_as_absolute(paste0('../', path))
   base::cat(
     "---\n",
     yaml::as.yaml(rmarkdown::yaml_front_matter(abs.path)),  # yaml header from original .Rmd file
     "---\n\n",
     # "**Source file\\:** ", path, "\n\n",  # link to original .Rmd file; update (it's commented) of issues/95
     "```{r child='", abs.path, "'}\n```",   # code (not yaml header) of original .Rmd file
-    sep="",
-    file=alias  # where a file will be created
+    sep = "",
+    file = alias  # where a file will be created
   )
 }
 
 # ensure that a) .analysis is the working directory, b) folder with subdirectories (subfolders) is in the workflowr project directory
-wflow_build_dir<-function(files=NULL, dir='codeRmd', ...) {
+wflow_build_dir <- function(files = NULL, dir = 'codeRmd', ...) {
   if (base::is.null(files)) {
-    files<-list.files(paste0('../', dir), recursive=T,
-                      include.dirs=T, pattern="./*.(r|R)md")
+    files <- list.files(paste0('../', dir), recursive = T,
+                      include.dirs = T, pattern = "./*.(r|R)md")
   }
   else {
     for (file in files) {
@@ -44,9 +44,9 @@ wflow_build_dir<-function(files=NULL, dir='codeRmd', ...) {
     }
   }
 
-  file_aliases<-base::gsub("/", "--", files)
-  base::mapply(generate_rmd, files, file_aliases, dir=dir)
-  workflowr::wflow_build(files=file_aliases, ...)
+  file_aliases <- base::gsub("/", "--", files)
+  base::mapply(generate_rmd, files, file_aliases, dir = dir)
+  workflowr::wflow_build(files = file_aliases, ...)
   base::invisible(file.remove(file_aliases))
 }
 
@@ -65,7 +65,7 @@ wflow_build_dir()
 
 # step 6 - commit/publish, push
 base::setwd("../")  # set workflowr project as the working directory
-workflowr::wflow_publish(".", "small updates in '_preparationSubfolders.R'")  # 1stly ensure that correct working directory is set
+workflowr::wflow_publish(".", "adding spaces before and after assignment operators")  # 1stly ensure that correct working directory is set
 workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")  # choose 1 to create repository "workflowrSubfolders" automatically -> sign-in in loaded web browser to authenticate
 workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 
