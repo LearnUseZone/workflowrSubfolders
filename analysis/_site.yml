@@ -1,5 +1,5 @@
 name: workflowrSubfolders
-output_dir: ../public
+output_dir: ../docs
 navbar:
   title: workflowrSubfolders
   left:
@@ -10,9 +10,9 @@ navbar:
   - text: License
     href: license.html
   right:
-  - icon: fa-gitlab
+  - icon: fa-github
     text: Source code
-    href: https://gitlab.com/LearnUseZone/workflowrSubfolders
+    href: https://github.com/LearnUseZone/workflowrSubfolders
 output:
   workflowr::wflow_html:
     toc: yes
