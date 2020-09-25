@@ -22,6 +22,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
 <!-- Add a small amount of space between sections. -->
@@ -290,7 +292,13 @@ $(document).ready(function () {
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/LearnUseZone/workflowrSubfolders">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -307,7 +315,7 @@ $(document).ready(function () {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -316,7 +324,7 @@ $(document).ready(function () {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -325,10 +333,10 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-09-17
+<strong>Last updated:</strong> 2020-09-25
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>workflowrSubfolders/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -344,34 +352,47 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstronga2ab120"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> a2ab120 </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomLearnUseZoneworkflowrSubfolderstree3cd2e29947641787956bfe560ec0b41dce6116cctargetblank3cd2e29a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/LearnUseZone/workflowrSubfolders/tree/3cd2e29947641787956bfe560ec0b41dce6116cc" target="_blank">3cd2e29</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstronga2ab120" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomLearnUseZoneworkflowrSubfolderstree3cd2e29947641787956bfe560ec0b41dce6116cctargetblank3cd2e29a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version a2ab120. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/LearnUseZone/workflowrSubfolders/tree/3cd2e29947641787956bfe560ec0b41dce6116cc" target="_blank">3cd2e29</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
-working directory clean
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+
+Untracked files:
+    Untracked:  codeRmd/subPages2/_site.yml
+
+Unstaged changes:
+    Modified:   analysis/_site.yml
+    Modified:   analysis/index.Rmd
+    Modified:   code/_preparationSubfolders.R
+    Modified:   codeRmd/subPages1/testPrint1.Rmd
+    Modified:   codeRmd/subPages2/testPrint2.Rmd
+
 </code></pre>
 <p>
 Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
@@ -411,10 +432,61 @@ Message
 <tbody>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/LearnUseZone/workflowrSubfolders/3cd2e29947641787956bfe560ec0b41dce6116cc/docs/index.html" target="_blank">3cd2e29</a>
+</td>
+<td>
+LearnUseZone
+</td>
+<td>
+2020-09-24
+</td>
+<td>
+Host with GitHub.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/LearnUseZone/workflowrSubfolders/02a8147651912ddb2059c518ffbb5da49b5a3ddf/docs/index.html" target="_blank">02a8147</a>
+</td>
+<td>
+LearnUseZone
+</td>
+<td>
+2020-09-24
+</td>
+<td>
+Host with GitLab.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/LearnUseZone/workflowrSubfolders/fe18b56014a5fed61be1435039795e8cd3935e43/docs/index.html" target="_blank">fe18b56</a>
+</td>
+<td>
+LearnUseZone
+</td>
+<td>
+2020-09-17
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-a2ab120
+<a href="https://github.com/LearnUseZone/workflowrSubfolders/blob/a2ab1200be7c8ce7a63f93a123b8e34435979c2f/analysis/index.Rmd" target="_blank">a2ab120</a>
 </td>
 <td>
 LearnUseZone
@@ -431,7 +503,7 @@ commit text: initial publish
 html
 </td>
 <td>
-a2ab120
+<a href="https://rawcdn.githack.com/LearnUseZone/workflowrSubfolders/a2ab1200be7c8ce7a63f93a123b8e34435979c2f/docs/index.html" target="_blank">a2ab120</a>
 </td>
 <td>
 LearnUseZone
@@ -448,7 +520,7 @@ commit text: initial publish
 Rmd
 </td>
 <td>
-684ddb1
+<a href="https://github.com/LearnUseZone/workflowrSubfolders/blob/684ddb18be09fcc0c79634e4c3d280a9d7011ebc/analysis/index.Rmd" target="_blank">684ddb1</a>
 </td>
 <td>
 LearnUseZone
@@ -467,7 +539,7 @@ Start workflowr project.
 </div>
 </div>
 </div>
-<p>Welcome to my research website. Link to <a href="./subPages/aboutSubPages.html">aboutSubPages</a>.</p>
+<p>Welcome to my research website. Link to <a href="subPages1--testPrint1.html">subPages1</a>. Link to <a href="subPages2--testPrint2.html">subPages2</a>.</p>
 
 
 <!-- Adjust MathJax settings so that all math formulae are shown using

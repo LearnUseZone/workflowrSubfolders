@@ -7,8 +7,8 @@
 #  Folder "workflowr project directory/code": This directory is for code that might not be appropriate to include
 #    in R Markdown format (e.g. for pre-processing the data, or for long-running code). [https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html]
 #    For organizational purposes: don't write save .Rmd files here, create suitable subfolders here. [me]
-#  Create "workflowr project directory/codeRmd" folder (with further additional folder names that are same as "workflowr project directory/code" subfolder names)
-#    for .Rmd files for relevant "workflowr project directory/code" subfolders. [me]
+#  Create "workflowr project directory/codeRmd" folder (with further additional subfolder names that are same as "workflowr project directory/code" subfolder names)
+#    for .Rmd files associated to files within relevant "workflowr project directory/code" subfolders. [me]
 #    Important: Don't use "analysis/codeRmd" otherwise following error pops-up when using workflowr::wflow_publish(...)
 #      Error in to_html(files_analysis, outdir = o$docs) : Invalid file extension
 
@@ -23,7 +23,7 @@ generate_rmd <- function(path, alias, dir) {
     "---\n",
     yaml::as.yaml(rmarkdown::yaml_front_matter(abs.path)),  # yaml header from original .Rmd file
     "---\n\n",
-    # "**Source file\\:** ", path, "\n\n",  # link to original .Rmd file; update (it's commented) of issues/95
+    # "**Source file\\:** ", path, "\n\n",    # link to original .Rmd file; update (it's commented) of issues/95
     "```{r child = '", abs.path, "'}\n```",   # code (not yaml header) of original .Rmd file
     sep = "",
     file = alias  # where a file will be created
@@ -51,21 +51,25 @@ wflow_build_dir <- function(files = NULL, dir = 'codeRmd', ...) {
 }
 
 # step 4 - execute wflow_build_dir()
+#   Disadvantage of this approach is that "--strip-comments" doesn't work
+#     either if it's correctly used in _site.yml in "analysis" file or
+#     if this _site.yml is also copied within the same folder as a relevant .Rmd file (that's a result of previous 2 functions).
+#   Therefore if comments shouldn't me show, create a new r chunk with parameter include = FALSE.
 wflow_build_dir()
 
 # step 5 - at this point
 #   - folder "code" contains subfolders with (e.g.) development codes, ...
 #   - folder "codeRmd" contains subfolders with .Rmd files associated with development codes, ...
 #   - more efficient way (less manual work) of creating .html files is prepared in comparison with steps on 19-09-17
-#     plus a potential problem with the workflowr reproducibility checks [https://github.com/jdblischak/workflowr/issues/220#issuecomment-694924738] could be resolved.
-#   - folder "docs" contains .html files created from .Rmd files from folder "codeRmd" but I'd like to have them in an appropriate subfolders instead of using delimiters like "--"
-#     so that means similar steps like on 19-09-17 in "step 4" and "step 5" should be applied or I need to live with using of delimiters like "--"
-#       - I think to simply live with that because I critical is to have perfectly organized .Rmd files rather than .html files because workflowr will basically take care about these .html files.
+#     plus a potential problem with the workflowr reproducibility checks [https://github.com/jdblischak/workflowr/issues/220#issuecomment-694924738] is resolved.
+#   - folder "docs" contains .html files created from .Rmd files from folder "codeRmd" but although I'd like to have them in an appropriate subfolders instead of using delimiters like "--"
+#     (so maybe similar steps like on 19-09-17 in "step 4" and "step 5" should be applied), I will accept usage of these delimiters
+#     because critical is to have perfectly organized .Rmd files rather than .html files and let workflowr to take care of these .html files.
 #   - keep in mind to use correct hyperlinks to future .html files (this shouldn't be a problem)
 
 # step 6 - commit/publish, push
-base::setwd("../")  # set workflowr project as the working directory
-workflowr::wflow_publish(".", "better notes for wflow_use_github()")  # 1stly ensure that correct working directory is set
+base::setwd("../")  # set workflowr project directory as the working directory
+workflowr::wflow_publish(".", "using of relative path in .Rmd files in subfolders")
 workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")    # choose 1 to create a remote repository automatically -> sign-in in loaded web browser to authenticate; choose 2 if a remote repository is already created
 workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 

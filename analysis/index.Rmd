@@ -9,4 +9,5 @@ editor_options:
 ---
 
 Welcome to my research website.
-Link to [aboutSubPages](./subPages/aboutSubPages.html).
+Link to [subPages1](subPages1--testPrint1.html).
+Link to [subPages2](subPages2--testPrint2.html).

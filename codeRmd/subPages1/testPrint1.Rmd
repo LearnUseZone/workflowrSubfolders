@@ -11,6 +11,12 @@ This file in folder "subPages1" is for testing of half manual/automated workarou
 to use package workflowr and sub-folders in folder "analysis".
 
 call function from another file
-```{r}
-source("D:/Cloud/Sync/Study/Programming/R/Work/Projects/GitHub/workflowrSubfolders/code/subPages1/print1.R")
+```{r call_source}
+source(here::here("code/subPages1/print1.R"))
+```
+
+```{r hidden_comments, include = FALSE}
+# used literature
+# [lit 1] https://github.com/jdblischak/workflowr/issues/220
+# [lit 2] https://jdblischak.github.io/workflowr/articles/wflow-07-common-code.html
 ```
