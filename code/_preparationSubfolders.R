@@ -3,7 +3,20 @@
 #   -> https://github.com/jdblischak/workflowr/issues/95
 # ----
 
-# step 1 - create suitable subfolders
+
+# step 1 - ensure that index.html is already created in folder "docs" (using workflowr::wflow_build())
+#   - otherwise you can receive error like follows:
+#   Error in wflow_view(index, project = project) :
+#     No HTML files were able to viewed.  Try running
+#   `wflow_build()` first.
+#   In addition: Warning message:
+#     In wflow_view(index, project = project) :
+#
+#     Error in wflow_view(index, project = project) :
+#     No HTML files were able to viewed.  Try running
+#   `wflow_build()` first.
+
+# step 2 - create suitable subfolders
 #  Folder "workflowr project directory/code": This directory is for code that might not be appropriate to include
 #    in R Markdown format (e.g. for pre-processing the data, or for long-running code). [https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html]
 #    For organizational purposes: don't write save .Rmd files here, create suitable subfolders here. [me]
@@ -12,19 +25,19 @@
 #    Important: Don't use "analysis/codeRmd" otherwise following error pops-up when using workflowr::wflow_publish(...)
 #      Error in to_html(files_analysis, outdir = o$docs) : Invalid file extension
 
-# step 2 - ensure that ./analysis is the working directory
+# step 3 - ensure that ./analysis is the working directory
 
-# step 3 - execute generate_rmd() and wflow_build_dir()
+# step 4 - execute generate_rmd() and wflow_build_dir()
 #   edited codes from https://github.com/jdblischak/workflowr/issues/95#issuecomment-360094662
-generate_rmd <- function(path, alias, dir) {
+generate_rmd <- function(path, alias, dir) {  # from original .Rmd files (saved in subfolders), it generates temporary .Rmd files (like "subPages1--testPrint1.Rmd") into folder "analysis"
   path <- base::paste0(dir, '/', path)
   abs.path <- tools::file_path_as_absolute(paste0('../', path))
   base::cat(
     "---\n",
-    yaml::as.yaml(rmarkdown::yaml_front_matter(abs.path)),  # yaml header from original .Rmd file
+    yaml::as.yaml(rmarkdown::yaml_front_matter(abs.path)),  # YAML header from original .Rmd file
     "---\n\n",
     # "**Source file\\:** ", path, "\n\n",    # link to original .Rmd file; update (it's commented) of issues/95
-    "```{r child = '", abs.path, "'}\n```",   # code (not yaml header) of original .Rmd file
+    "```{r child = '", abs.path, "'}\n```",   # code (not YAML header) from original .Rmd file
     sep = "",
     file = alias  # where a file will be created
   )
@@ -45,19 +58,15 @@ wflow_build_dir <- function(files = NULL, dir = 'codeRmd', ...) {
   }
 
   file_aliases <- base::gsub("/", "--", files)
-  base::mapply(generate_rmd, files, file_aliases, dir = dir)
-  workflowr::wflow_build(files = file_aliases, ...)
-  base::invisible(file.remove(file_aliases))
+  base::mapply(generate_rmd, files, file_aliases, dir = dir)  # generates temporary .Rmd files
+  workflowr::wflow_build(files = file_aliases, ...)  # generates .html files from temporary .Rmd files
+  base::invisible(file.remove(file_aliases))         # delete temporary .Rmd files
 }
 
-# step 4 - execute wflow_build_dir()
-#   Disadvantage of this approach is that "--strip-comments" doesn't work
-#     either if it's correctly used in _site.yml in "analysis" file or
-#     if this _site.yml is also copied within the same folder as a relevant .Rmd file (that's a result of previous 2 functions).
-#   Therefore if comments shouldn't me show, create a new r chunk with parameter include = FALSE.
+# step 5 - execute wflow_build_dir()
 wflow_build_dir()
 
-# step 5 - at this point
+# step 6 - at this point
 #   - folder "code" contains subfolders with (e.g.) development codes, ...
 #   - folder "codeRmd" contains subfolders with .Rmd files associated with development codes, ...
 #   - more efficient way (less manual work) of creating .html files is prepared in comparison with steps on 19-09-17
@@ -67,9 +76,9 @@ wflow_build_dir()
 #     because critical is to have perfectly organized .Rmd files rather than .html files and let workflowr to take care of these .html files.
 #   - keep in mind to use correct hyperlinks to future .html files (this shouldn't be a problem)
 
-# step 6 - commit/publish, push
+# step 7 - commit/publish, push
 base::setwd("../")  # set workflowr project directory as the working directory
-workflowr::wflow_publish(".", "using of relative path in .Rmd files in subfolders")
+workflowr::wflow_publish(".", "updated files: .Rmd, .html, preparationSubfolders")
 workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")    # choose 1 to create a remote repository automatically -> sign-in in loaded web browser to authenticate; choose 2 if a remote repository is already created
 workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 
