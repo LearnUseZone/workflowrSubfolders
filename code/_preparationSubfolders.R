@@ -94,7 +94,7 @@ wflow_build_dir()
 
 
 # step 7 - commit/publish, push
-workflowr::wflow_publish(".", "working relative path in temporary .Rmd")
+workflowr::wflow_publish(".", "testPrint1.Rmd - note why here::here() is not used")
 workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")    # choose 1 to create a remote repository automatically -> sign-in in loaded web browser to authenticate; choose 2 if a remote repository is already created
 workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 

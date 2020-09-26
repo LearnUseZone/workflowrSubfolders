@@ -424,16 +424,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomLearnUseZoneworkflowrSubfolderstree3f5f01b35730b80c2acc5c5c0cf3172e5efcc1a7targetblank3f5f01ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/LearnUseZone/workflowrSubfolders/tree/3f5f01b35730b80c2acc5c5c0cf3172e5efcc1a7" target="_blank">3f5f01b</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomLearnUseZoneworkflowrSubfolderstree41147d0ec0172bd0366bcfb04a59cb54e9b19285targetblank41147d0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/LearnUseZone/workflowrSubfolders/tree/41147d0ec0172bd0366bcfb04a59cb54e9b19285" target="_blank">41147d0</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomLearnUseZoneworkflowrSubfolderstree3f5f01b35730b80c2acc5c5c0cf3172e5efcc1a7targetblank3f5f01ba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomLearnUseZoneworkflowrSubfolderstree41147d0ec0172bd0366bcfb04a59cb54e9b19285targetblank41147d0a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/LearnUseZone/workflowrSubfolders/tree/3f5f01b35730b80c2acc5c5c0cf3172e5efcc1a7" target="_blank">3f5f01b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/LearnUseZone/workflowrSubfolders/tree/41147d0ec0172bd0366bcfb04a59cb54e9b19285" target="_blank">41147d0</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -448,7 +448,8 @@ Untracked files:
     Untracked:  analysis/subPages2--testPrint2.Rmd
 
 Unstaged changes:
-    Modified:   code/_preparationSubfolders.R
+    Modified:   codeRmd/subPages1/testPrint1.Rmd
+    Modified:   codeRmd/subPages2/testPrint2.Rmd
 
 </code></pre>
 <p>
@@ -487,6 +488,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/LearnUseZone/workflowrSubfolders/41147d0ec0172bd0366bcfb04a59cb54e9b19285/docs/subPages2--testPrint2.html" target="_blank">41147d0</a>
+</td>
+<td>
+LearnUseZone
+</td>
+<td>
+2020-09-26
+</td>
+<td>
+working relative path in temporary .Rmd
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -752,7 +770,7 @@ updated and replaced preparation file, deleting
 <p><strong>Source file:</strong> codeRmd/subPages2/testPrint2.Rmd</p>
 <p>This file in folder “subPages2” is for testing of half manual/automated workaround to use package workflowr and sub-folders in folder “analysis”.</p>
 <p>call function from another file</p>
-<pre class="r"><code>source(here::here(&quot;code/subPages2/print2.R&quot;))</code></pre>
+<pre class="r"><code>source(&quot;code/subPages2/print2.R&quot;)</code></pre>
 <pre><code>[1] &quot;Hello world 2.&quot;</code></pre>
 <br>
 <p>
@@ -782,14 +800,13 @@ other attached packages:
 
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.5      rstudioapi_0.11 whisker_0.4     knitr_1.29     
- [5] magrittr_1.5    here_0.1        R6_2.4.1        rlang_0.4.7    
- [9] stringr_1.4.0   tools_4.0.2     xfun_0.17       git2r_0.27.1   
-[13] htmltools_0.5.0 ellipsis_0.3.1  rprojroot_1.3-2 yaml_2.2.1     
-[17] digest_0.6.25   tibble_3.0.3    lifecycle_0.2.0 crayon_1.3.4   
-[21] later_1.1.0.1   vctrs_0.3.2     promises_1.1.1  fs_1.5.0       
-[25] glue_1.4.2      evaluate_0.14   rmarkdown_2.3   stringi_1.5.3  
-[29] compiler_4.0.2  pillar_1.4.6    backports_1.1.9 httpuv_1.5.4   
-[33] pkgconfig_2.0.3</code></pre>
+ [5] magrittr_1.5    R6_2.4.1        rlang_0.4.7     stringr_1.4.0  
+ [9] tools_4.0.2     xfun_0.17       git2r_0.27.1    htmltools_0.5.0
+[13] ellipsis_0.3.1  rprojroot_1.3-2 yaml_2.2.1      digest_0.6.25  
+[17] tibble_3.0.3    lifecycle_0.2.0 crayon_1.3.4    later_1.1.0.1  
+[21] vctrs_0.3.2     promises_1.1.1  fs_1.5.0        glue_1.4.2     
+[25] evaluate_0.14   rmarkdown_2.3   stringi_1.5.3   compiler_4.0.2 
+[29] pillar_1.4.6    backports_1.1.9 httpuv_1.5.4    pkgconfig_2.0.3</code></pre>
 </div>
 
 

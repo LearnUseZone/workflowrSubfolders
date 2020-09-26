@@ -12,11 +12,12 @@ to use package workflowr and sub-folders in folder "analysis".
 
 call function from another file
 ```{r call_source}
-source(here::here("code/subPages1/print1.R"))
+source("code/subPages1/print1.R")
 ```
 
 ```{r hidden_comments, include = FALSE}
 # used literature
-# [lit 1] https://github.com/jdblischak/workflowr/issues/220
-# [lit 2] https://jdblischak.github.io/workflowr/articles/wflow-07-common-code.html
+# [lit 1]  https://github.com/jdblischak/workflowr/issues/220
+# [lit 1a] https://github.com/jdblischak/workflowr/issues/220#issuecomment-699083120 - why here::here() is not used
+# [lit 2]  https://jdblischak.github.io/workflowr/articles/wflow-07-common-code.html
 ```
