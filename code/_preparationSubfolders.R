@@ -49,9 +49,7 @@ generate_rmd <- function(path, alias, dir) {
 }
 
 # render .html files from their original .Rmd files stored in subdirectories
-wflow_build_dir <- function(files = NULL, dir = "codeRmd", ...) {
-  # dir - a directory in workflowr project directory; it can contain also subfolders
-
+wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
   setwd(here::here())           # set workflowr project directory as a working directory (just in case it's not set already)
   if (base::is.null(files)) {
     files <- list.files(        # generate paths (not only file names) to .Rmd files in subfolders under folder in parameter "dir"
@@ -61,26 +59,39 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", ...) {
       pattern = "./*.(r|R)md"
     )
   }
-  else {
-    for (file in files) {
-      path<-base::paste0(dir, "/", file)
-      if (!file.exists(paste0('../', path)))
-        stop(base::paste0("File doesn't exist: ./", path))
-    }
-  }
+  # currently not used
+  # else {
+  #   for (file in files) {
+  #     path<-base::paste0(dir, "/", file)
+  #     if (!file.exists(paste0('../', path)))
+  #       stop(base::paste0("File doesn't exist: ./", path))
+  #   }
+  # }
 
 
   file_aliases <- base::gsub("/", "--", files)             # change "/" in paths to .Rmd files to generate file names (not paths) with "--", these are new file names of .Rmd files that will be generated in folder "analysis"
   base::mapply(generate_rmd, files, file_aliases, dir)     # generate temporary .Rmd files
 
-  file_aliasesPath <- paste0("./analysis/", file_aliases)  # paths to temporary .Rmd files that will be also deleted after .html files are rendered from them
-  workflowr::wflow_build(files = file_aliasesPath, ...)    # generate .html files from temporary .Rmd files
-  base::invisible(file.remove(file_aliasesPath))           # delete temporary .Rmd files from folder "analysis"
+  ###file_aliasesPath <- paste0("./analysis/", file_aliases)  # paths to temporary .Rmd files that will be also deleted after .html files are rendered from them
+
+
+  if (commit == T) {
+    workflowr::wflow_publish("analysis/*--*Rmd", "commit new .Rmd files from subfolders separately")  # also generate .html files from temporary .Rmd files
+  }
+  ###workflowr::wflow_build(files = file_aliasesPath, ...)
+
+
+
+  base::invisible(file.remove(paste0("./analysis/", file_aliases)))  # delete temporary .Rmd files from folder "analysis"
+
+  # parameters
+  # dir - a directory in workflowr project directory; it can contain also subfolders
+  # commit - TRUE = commit of temporary .Rmd files will be made; choose this commit after these temporary .Rmd files are completely ready
 }
 
 
 # step 5 - execute wflow_build_dir()
-wflow_build_dir()
+wflow_build_dir(commit = T)
 
 # step 6 - at this point
 #   - folder "code" contains subfolders with (e.g.) development codes, ...
@@ -94,7 +105,7 @@ wflow_build_dir()
 
 
 # step 7 - commit/publish, push
-workflowr::wflow_publish(".", "testPrint1.Rmd - note why here::here() is not used")
+workflowr::wflow_publish(".", "wflow_build() was used to build index.html")
 workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")    # choose 1 to create a remote repository automatically -> sign-in in loaded web browser to authenticate; choose 2 if a remote repository is already created
 workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 
