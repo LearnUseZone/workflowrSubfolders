@@ -357,7 +357,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -424,16 +424,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomLearnUseZoneworkflowrSubfolderstree254302d0c2b603d90ffb32a83a3f14d578477407targetblank254302da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/LearnUseZone/workflowrSubfolders/tree/254302d0c2b603d90ffb32a83a3f14d578477407" target="_blank">254302d</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomLearnUseZoneworkflowrSubfolderstree1180996f04533c0e3d2763e677c72160698600e8targetblank1180996a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/LearnUseZone/workflowrSubfolders/tree/1180996f04533c0e3d2763e677c72160698600e8" target="_blank">1180996</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomLearnUseZoneworkflowrSubfolderstree254302d0c2b603d90ffb32a83a3f14d578477407targetblank254302da" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomLearnUseZoneworkflowrSubfolderstree1180996f04533c0e3d2763e677c72160698600e8targetblank1180996a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/LearnUseZone/workflowrSubfolders/tree/254302d0c2b603d90ffb32a83a3f14d578477407" target="_blank">254302d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/LearnUseZone/workflowrSubfolders/tree/1180996f04533c0e3d2763e677c72160698600e8" target="_blank">1180996</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -443,19 +443,12 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
+Untracked files:
+    Untracked:  analysis/subPages1--testPrint1.Rmd
+    Untracked:  analysis/subPages2--testPrint2.Rmd
+
 Unstaged changes:
-    Deleted:    analysis/external/testPrint3.Rmd
-    Modified:   analysis/subPages1--testPrint1.Rmd
-    Modified:   analysis/subPages2--testPrint2.Rmd
-    Deleted:    analysis/subPages3--testPrint3.Rmd
-    Deleted:    analysis/subPages4--testPrint4.Rmd
-    Deleted:    analysis/subPages5--testPrint5.Rmd
-    Deleted:    analysis/subPages6--testPrint6.Rmd
-    Deleted:    analysis/testPrint4.Rmd
     Modified:   code/_preparationSubfolders.R
-    Deleted:    codeRmd/subPages5/testPrint5.Rmd
-    Deleted:    codeRmd/subPages6/testPrint6.Rmd
-    Deleted:    codeRmd/testPrint4.Rmd
 
 </code></pre>
 <p>
@@ -494,6 +487,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/LearnUseZone/workflowrSubfolders/blob/1180996f04533c0e3d2763e677c72160698600e8/analysis/subPages1--testPrint1.Rmd" target="_blank">1180996</a>
+</td>
+<td>
+LearnUseZone
+</td>
+<td>
+2020-09-26
+</td>
+<td>
+working relative path in temporary .Rmd - phase 2
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/LearnUseZone/workflowrSubfolders/1180996f04533c0e3d2763e677c72160698600e8/docs/subPages1--testPrint1.html" target="_blank">1180996</a>
+</td>
+<td>
+LearnUseZone
+</td>
+<td>
+2020-09-26
+</td>
+<td>
+working relative path in temporary .Rmd - phase 2
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -688,6 +715,7 @@ updated and replaced preparation file, deleting
 </div>
 </div>
 </div>
+<p><strong>Source file:</strong> codeRmd/subPages1/testPrint1.Rmd</p>
 <p>This file in folder “subPages1” is for testing of half manual/automated workaround to use package workflowr and sub-folders in folder “analysis”.</p>
 <p>call function from another file</p>
 <pre class="r"><code>source(here::here(&quot;code/subPages1/print1.R&quot;))</code></pre>

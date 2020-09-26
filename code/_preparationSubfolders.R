@@ -1,6 +1,5 @@
-# 20-09-19
-# Steps based on [lit 1]
-#   -> https://github.com/jdblischak/workflowr/issues/95
+# 20-09-26
+# Additional information is in [lit 1]
 # ----
 
 
@@ -27,34 +26,30 @@
 
 # step 3 - ensure that ./analysis is the working directory
 
-# step 4 - execute generate_rmd() and wflow_build_dir() that are edited codes from [lit 3]
+# step 4 - execute generate_rmd() and wflow_build_dir() that are edited codes from [lit 3a]
 # generate temporary .Rmd files from original .Rmd files (saved in subfolders) into folder "analysis"
 generate_rmd <- function(path, alias, dir) {
-  path <- base::paste0(dir, '/', path)
-
-
-
-  abs.path <- tools::file_path_as_absolute(paste0('./', path))  # path to an original .Rmd file (this file will be rendered to .html file inside function wflow_build_dir())
-
-
-
-
-  setwd("./analysis")                                           # folder where base::cat() will save generated temporary .Rmd files; it has to be right before base::cat() function
+  relPath <- base::paste0("../", dir, '/', path)           # relative path to an original .Rmd file that will be rendered to .html file inside function wflow_build_dir(), ../ is used because "analysis" will be "starting directory" for a relative path (see below)
+  setwd("./analysis")                                      # folder where base::cat() will save generated temporary .Rmd files; I didn't find a better placement than right before base::cat() function
   base::cat(
     "---\n",
-    yaml::as.yaml(rmarkdown::yaml_front_matter(abs.path)),      # YAML header from an original .Rmd file
+    yaml::as.yaml(rmarkdown::yaml_front_matter(relPath)),  # YAML header from an original .Rmd file
     "---\n\n",
-    # "**Source file\\:** ", path, "\n\n",                      # link to original .Rmd file; update (it's commented) of issues/95
-    "```{r child = file.path(knitr::opts_knit$get(\"output.dir\"), \"../", path, "\")}\n```",             # https://github.com/jdblischak/workflowr/issues/111        # r chunk code (not YAML header) containing absolute path to an original .Rmd file
-    file = alias,                                               # a name of file that will be created
+    "**Source file\\:** ", base::paste0(dir, '/', path),   # link to original .Rmd file from workflowr subdirectory
+    "\n\n",
+
+    # [lit 4]; r chunk code (not YAML header)
+    "```{r child = file.path(knitr::opts_knit$get(\"output.dir\"), \"", relPath, "\")}\n```",
+
+    file = alias,                                          # a name of file that will be created
     sep = "",
-    append = F                                                  # overwrite a content of a file
+    append = F                                             # overwrite a content of a file
   )
-  setwd("../")                                                  # set up workflowr project directory again as a working directory
+  setwd("../")                                             # set up workflowr project directory again as a working directory
 }
 
 # render .html files from their original .Rmd files stored in subdirectories
-wflow_build_dir <- function(files = NULL, dir = 'codeRmd', ...) {
+wflow_build_dir <- function(files = NULL, dir = "codeRmd", ...) {
   # dir - a directory in workflowr project directory; it can contain also subfolders
 
   setwd(here::here())           # set workflowr project directory as a working directory (just in case it's not set already)
@@ -111,6 +106,7 @@ workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 # [lit 1]  [https://github.com/jdblischak/workflowr/issues/220]
 # [lit 1a] https://github.com/jdblischak/workflowr/issues/220#issuecomment-694924738
 # [lit 2]  https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html
-# [lit 3] https://github.com/jdblischak/workflowr/issues/95#issuecomment-360094662
-
+# [lit 3]  https://github.com/jdblischak/workflowr/issues/95
+# [lit 3a] https://github.com/jdblischak/workflowr/issues/95#issuecomment-360094662
+# [lit 4]  https://github.com/jdblischak/workflowr/issues/111#issuecomment-407861132 - explanation of usage knitr::opts_knit$get("output.dir") for creating of a relative path in parameter "child"
 
