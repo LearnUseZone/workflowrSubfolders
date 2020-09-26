@@ -1,5 +1,5 @@
 # 20-09-19
-# Steps based on https://github.com/jdblischak/workflowr/issues/220#issuecomment-694924738
+# Steps based on [lit 1]
 #   -> https://github.com/jdblischak/workflowr/issues/95
 # ----
 
@@ -18,7 +18,7 @@
 
 # step 2 - create suitable subfolders
 #  Folder "workflowr project directory/code": This directory is for code that might not be appropriate to include
-#    in R Markdown format (e.g. for pre-processing the data, or for long-running code). [https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html]
+#    in R Markdown format (e.g. for pre-processing the data, or for long-running code). [lit 2]
 #    For organizational purposes: don't write save .Rmd files here, create suitable subfolders here. [me]
 #  Create "workflowr project directory/codeRmd" folder (with further additional subfolder names that are same as "workflowr project directory/code" subfolder names)
 #    for .Rmd files associated to files within relevant "workflowr project directory/code" subfolders. [me]
@@ -70,7 +70,7 @@ wflow_build_dir()
 #   - folder "code" contains subfolders with (e.g.) development codes, ...
 #   - folder "codeRmd" contains subfolders with .Rmd files associated with development codes, ...
 #   - more efficient way (less manual work) of creating .html files is prepared in comparison with steps on 19-09-17
-#     plus a potential problem with the workflowr reproducibility checks [https://github.com/jdblischak/workflowr/issues/220#issuecomment-694924738] is resolved.
+#     plus a potential problem with the workflowr reproducibility checks [lit 1a] is resolved.
 #   - folder "docs" contains .html files created from .Rmd files from folder "codeRmd" but although I'd like to have them in an appropriate subfolders instead of using delimiters like "--"
 #     (so maybe similar steps like on 19-09-17 in "step 4" and "step 5" should be applied), I will accept usage of these delimiters
 #     because critical is to have perfectly organized .Rmd files rather than .html files and let workflowr to take care of these .html files.
@@ -78,7 +78,14 @@ wflow_build_dir()
 
 # step 7 - commit/publish, push
 base::setwd("../")  # set workflowr project directory as the working directory
-workflowr::wflow_publish(".", "updated files: .Rmd, .html, preparationSubfolders")
+workflowr::wflow_publish(".", "updated _preparationSubfolders.R")
 workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")    # choose 1 to create a remote repository automatically -> sign-in in loaded web browser to authenticate; choose 2 if a remote repository is already created
 workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
+
+
+# used literature
+# [lit 1]  [https://github.com/jdblischak/workflowr/issues/220]
+# [lit 1a] https://github.com/jdblischak/workflowr/issues/220#issuecomment-694924738
+# [lit 2]  https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html
+
 
