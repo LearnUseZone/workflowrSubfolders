@@ -31,14 +31,23 @@
 # generate temporary .Rmd files from original .Rmd files (saved in subfolders) into folder "analysis"
 generate_rmd <- function(path, alias, dir) {
   path <- base::paste0(dir, '/', path)
+
+
+
   abs.path <- tools::file_path_as_absolute(paste0('./', path))  # path to an original .Rmd file (this file will be rendered to .html file inside function wflow_build_dir())
+  rel.path <- file.path(path)
+
+
+
+
+
   setwd("./analysis")                                           # folder where base::cat() will save generated temporary .Rmd files; it has to be right before base::cat() function
   base::cat(
     "---\n",
     yaml::as.yaml(rmarkdown::yaml_front_matter(abs.path)),      # YAML header from an original .Rmd file
     "---\n\n",
     # "**Source file\\:** ", path, "\n\n",                      # link to original .Rmd file; update (it's commented) of issues/95
-    "```{r child = '", abs.path, "'}\n```",                     # r chunk code (not YAML header) containing absolute path to an original .Rmd file
+    "```{r child = ", "file.path(knitr::opts_knit$get(\"output.dir\"), \"../codeRmd/subPages6\", \"testPrint6.Rmd\")", "}\n```",             # https://github.com/jdblischak/workflowr/issues/111        # r chunk code (not YAML header) containing absolute path to an original .Rmd file
     file = alias,                                               # a name of file that will be created
     sep = "",
     append = F                                                  # overwrite a content of a file
@@ -76,6 +85,10 @@ wflow_build_dir <- function(files = NULL, dir = 'codeRmd', ...) {
   base::invisible(file.remove(file_aliasesPath))           # delete temporary .Rmd files from folder "analysis"
 }
 
+
+# workflowr::wflow_build("./analysis/subPages5--testPrint5.Rmd")  # for testing purposes; working
+
+
 # step 5 - execute wflow_build_dir()
 wflow_build_dir()
 
@@ -89,10 +102,12 @@ wflow_build_dir()
 #     because critical is to have perfectly organized .Rmd files rather than .html files and let workflowr to take care of these .html files.
 #   - keep in mind to use correct hyperlinks to future .html files (this shouldn't be a problem)
 
-print("stop")
+
+print("stop")  # temporary for testing
+
 
 # step 7 - commit/publish, push
-workflowr::wflow_publish(".", "changes in 2 functions to not set \"analysis\" directory as the working directory")
+workflowr::wflow_publish(".", "working relative path in temporary .Rmd - phase 1")
 workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")    # choose 1 to create a remote repository automatically -> sign-in in loaded web browser to authenticate; choose 2 if a remote repository is already created
 workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 

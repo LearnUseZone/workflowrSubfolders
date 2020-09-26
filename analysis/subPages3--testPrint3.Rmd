@@ -1,0 +1,11 @@
+---
+title: About SubPages
+output:
+  workflowr::wflow_html:
+    toc: no
+editor_options:
+  chunk_output_type: console
+---
+
+```{r child = file.path(knitr::opts_knit$get("output.dir"), "external", "testPrint3.Rmd")}
+```
