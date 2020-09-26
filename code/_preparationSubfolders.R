@@ -27,27 +27,37 @@
 
 # step 3 - ensure that ./analysis is the working directory
 
-# step 4 - execute generate_rmd() and wflow_build_dir()
-#   edited codes from https://github.com/jdblischak/workflowr/issues/95#issuecomment-360094662
-generate_rmd <- function(path, alias, dir) {  # from original .Rmd files (saved in subfolders), it generates temporary .Rmd files (like "subPages1--testPrint1.Rmd") into folder "analysis"
+# step 4 - execute generate_rmd() and wflow_build_dir() that are edited codes from [lit 3]
+# generate temporary .Rmd files from original .Rmd files (saved in subfolders) into folder "analysis"
+generate_rmd <- function(path, alias, dir) {
   path <- base::paste0(dir, '/', path)
-  abs.path <- tools::file_path_as_absolute(paste0('../', path))
+  abs.path <- tools::file_path_as_absolute(paste0('./', path))  # path to an original .Rmd file (this file will be rendered to .html file inside function wflow_build_dir())
+  setwd("./analysis")                                           # folder where base::cat() will save generated temporary .Rmd files; it has to be right before base::cat() function
   base::cat(
     "---\n",
-    yaml::as.yaml(rmarkdown::yaml_front_matter(abs.path)),  # YAML header from original .Rmd file
+    yaml::as.yaml(rmarkdown::yaml_front_matter(abs.path)),      # YAML header from an original .Rmd file
     "---\n\n",
-    # "**Source file\\:** ", path, "\n\n",    # link to original .Rmd file; update (it's commented) of issues/95
-    "```{r child = '", abs.path, "'}\n```",   # code (not YAML header) from original .Rmd file
+    # "**Source file\\:** ", path, "\n\n",                      # link to original .Rmd file; update (it's commented) of issues/95
+    "```{r child = '", abs.path, "'}\n```",                     # r chunk code (not YAML header) containing absolute path to an original .Rmd file
+    file = alias,                                               # a name of file that will be created
     sep = "",
-    file = alias  # where a file will be created
+    append = F                                                  # overwrite a content of a file
   )
+  setwd("../")                                                  # set up workflowr project directory again as a working directory
 }
 
-# ensure that a) .analysis is the working directory, b) folder with subdirectories (subfolders) is in the workflowr project directory
+# render .html files from their original .Rmd files stored in subdirectories
 wflow_build_dir <- function(files = NULL, dir = 'codeRmd', ...) {
+  # dir - a directory in workflowr project directory; it can contain also subfolders
+
+  setwd(here::here())           # set workflowr project directory as a working directory (just in case it's not set already)
   if (base::is.null(files)) {
-    files <- list.files(paste0('../', dir), recursive = T,
-                      include.dirs = T, pattern = "./*.(r|R)md")
+    files <- list.files(        # generate paths (not only file names) to .Rmd files in subfolders under folder in parameter "dir"
+      dir,
+      recursive = T,
+      include.dirs = T,
+      pattern = "./*.(r|R)md"
+    )
   }
   else {
     for (file in files) {
@@ -57,10 +67,13 @@ wflow_build_dir <- function(files = NULL, dir = 'codeRmd', ...) {
     }
   }
 
-  file_aliases <- base::gsub("/", "--", files)
-  base::mapply(generate_rmd, files, file_aliases, dir = dir)  # generates temporary .Rmd files
-  workflowr::wflow_build(files = file_aliases, ...)  # generates .html files from temporary .Rmd files
-  base::invisible(file.remove(file_aliases))         # delete temporary .Rmd files
+
+  file_aliases <- base::gsub("/", "--", files)             # change "/" in paths to .Rmd files to generate file names (not paths) with "--", these are new file names of .Rmd files that will be generated in folder "analysis"
+  base::mapply(generate_rmd, files, file_aliases, dir)     # generate temporary .Rmd files
+
+  file_aliasesPath <- paste0("./analysis/", file_aliases)  # paths to temporary .Rmd files that will be also deleted after .html files are rendered from them
+  workflowr::wflow_build(files = file_aliasesPath, ...)    # generate .html files from temporary .Rmd files
+  base::invisible(file.remove(file_aliasesPath))           # delete temporary .Rmd files from folder "analysis"
 }
 
 # step 5 - execute wflow_build_dir()
@@ -76,9 +89,10 @@ wflow_build_dir()
 #     because critical is to have perfectly organized .Rmd files rather than .html files and let workflowr to take care of these .html files.
 #   - keep in mind to use correct hyperlinks to future .html files (this shouldn't be a problem)
 
+print("stop")
+
 # step 7 - commit/publish, push
-base::setwd("../")  # set workflowr project directory as the working directory
-workflowr::wflow_publish(".", "updated _preparationSubfolders.R")
+workflowr::wflow_publish(".", "changes in 2 functions to not set \"analysis\" directory as the working directory")
 workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")    # choose 1 to create a remote repository automatically -> sign-in in loaded web browser to authenticate; choose 2 if a remote repository is already created
 workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 
@@ -87,5 +101,6 @@ workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 # [lit 1]  [https://github.com/jdblischak/workflowr/issues/220]
 # [lit 1a] https://github.com/jdblischak/workflowr/issues/220#issuecomment-694924738
 # [lit 2]  https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html
+# [lit 3] https://github.com/jdblischak/workflowr/issues/95#issuecomment-360094662
 
 
