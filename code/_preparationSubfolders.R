@@ -68,7 +68,6 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
   #   }
   # }
 
-
   file_aliases <- base::gsub("/", "--", files)             # change "/" in paths to .Rmd files to generate file names (not paths) with "--", these are new file names of .Rmd files that will be generated in folder "analysis"
   base::mapply(generate_rmd, files, file_aliases, dir)     # generate temporary .Rmd files
 
@@ -77,10 +76,7 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
     workflowr::wflow_git_commit("analysis/*--*Rmd", "commit new .Rmd files from subfolders separately", all = T)
     ###workflowr::wflow_publish("analysis/*--*Rmd", "commit new .Rmd files from subfolders separately")
   }
-  workflowr::wflow_build(files = file_aliasesPath)  # generate .html files from temporary .Rmd files
-
-
-
+  workflowr::wflow_build(files = file_aliasesPath)         # generate .html files from temporary .Rmd files
   base::invisible(file.remove(paste0("./analysis/", file_aliases)))  # delete temporary .Rmd files from folder "analysis"
 
   # parameters
@@ -104,7 +100,7 @@ wflow_build_dir(commit = T)
 
 
 # step 7 - commit/publish, push
-workflowr::wflow_publish(".", "publish changes")
+workflowr::wflow_publish(".", "negligible changes in this _preparationSubfolders.R file")
 workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")    # choose 1 to create a remote repository automatically -> sign-in in loaded web browser to authenticate; choose 2 if a remote repository is already created
 workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 
