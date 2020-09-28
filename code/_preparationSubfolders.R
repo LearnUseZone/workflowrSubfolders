@@ -29,12 +29,12 @@
 # step 4 - execute generate_rmd() and wflow_build_dir() that are edited codes from [lit 3a]
 # generate temporary .Rmd files from original .Rmd files (saved in subfolders) into folder "analysis"
 generate_rmd <- function(path, alias, dir) {
-  relPath <- base::file.path(".", dir, path)                     # relative path to an original .Rmd file that will be rendered to .html file inside function wflow_build_dir(), "." is used for setting a correct path in parameter "child" of "r chunk" below
+  relPath <- base::file.path(".", dir, path)               # relative path to an original .Rmd file that will be rendered to .html file inside function wflow_build_dir(), "." is used for setting a correct path in parameter "child" of "r chunk" below
   base::cat(
     "---\n",
     yaml::as.yaml(rmarkdown::yaml_front_matter(relPath)),  # YAML header from an original .Rmd file
     "---\n\n",
-    "**Source file:** ", base::file.path(dir, path),             # link to original .Rmd file from workflowr subdirectory
+    "**Source file:** ", base::file.path(dir, path),       # link to original .Rmd file from workflowr subdirectory
     "\n\n",
 
     # r chunk code (not YAML header)
@@ -42,7 +42,7 @@ generate_rmd <- function(path, alias, dir) {
 
     file = base::file.path("analysis", alias),  # a name of file that will be created
     sep = "",
-    append = F                            # overwrite a content of a file
+    append = F                                  # overwrite a content of a file
   )
 }
 
@@ -98,7 +98,7 @@ wflow_build_dir(files = c("subPages3/testPrint3.Rmd"), dir = "codeRmd", commit =
 #   - keep in mind to use correct hyperlinks to future .html files (this shouldn't be a problem)
 
 # step 7 - commit/publish, push
-workflowr::wflow_publish(".", "updated wflow_build_dir()")
+workflowr::wflow_publish(".", "_preparationSubfolders.R - negligible updates; index.html - web link to testPrint3.html")
 workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")    # choose 1 to create a remote repository automatically -> sign-in in loaded web browser to authenticate; choose 2 if a remote repository is already created
 workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 
