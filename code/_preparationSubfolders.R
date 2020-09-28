@@ -73,7 +73,7 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
 
   file_aliasesPath <- paste0("./analysis/", file_aliases)  # paths to temporary .Rmd files that will be also deleted after .html files are rendered from them
   if (commit == T) {
-    workflowr::wflow_git_commit("./analysis/*--*Rmd", "commit new .Rmd files from subfolders separately", all = T)
+    workflowr::wflow_git_commit("analysis/*--*Rmd", "commit new .Rmd files from subfolders separately", all = T)
     ###workflowr::wflow_publish("analysis/*--*Rmd", "commit new .Rmd files from subfolders separately")
   }
   workflowr::wflow_build(files = file_aliasesPath)         # generate .html files from temporary .Rmd files
