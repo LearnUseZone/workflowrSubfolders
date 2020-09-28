@@ -29,21 +29,23 @@
 # step 4 - execute generate_rmd() and wflow_build_dir() that are edited codes from [lit 3a]
 # generate temporary .Rmd files from original .Rmd files (saved in subfolders) into folder "analysis"
 generate_rmd <- function(path, alias, dir) {
-  relPath <- file.path(".", dir, path)                    # relative path to an original .Rmd file that will be rendered to .html file inside function wflow_build_dir(), ../ is used because "analysis" will be "starting directory" for a relative path (see below)
+  relPath <- base::paste0("../", dir, '/', path)           # relative path to an original .Rmd file that will be rendered to .html file inside function wflow_build_dir(), ../ is used because "analysis" will be "starting directory" for a relative path (see below)
+  setwd("./analysis")                                      # folder where base::cat() will save generated temporary .Rmd files; I didn't find a better placement than right before base::cat() function
   base::cat(
     "---\n",
     yaml::as.yaml(rmarkdown::yaml_front_matter(relPath)),  # YAML header from an original .Rmd file
     "---\n\n",
-    "**Source file:** ", file.path(dir, path),           # link to original .Rmd file from workflowr subdirectory
+    "**Source file\\:** ", base::paste0(dir, '/', path),   # link to original .Rmd file from workflowr subdirectory
     "\n\n",
 
     # r chunk code (not YAML header)
-    "```{r child = file.path(knitr::opts_knit$get(\"output.dir\"), \".", relPath, "\")}\n```",  # [lit 4]; ...\".",... - this dot is REQUIRED here because knitr::opts_knit$get(\"output.dir\") returns "analysis" as output directory in this case so "child" parameter of "r chunk" has to firstly go one directory up (relPath starts with "./")
+    "```{r child = file.path(knitr::opts_knit$get(\"output.dir\"), \"", relPath, "\")}\n```",  # [lit 4] - for usage of knitr::opts_knit$get(\"output.dir\")
 
-    file = file.path("./", "analysis", alias),             # a name of file that will be created
+    file = alias,                                          # a name of file that will be created
     sep = "",
     append = F                                             # overwrite a content of a file
   )
+  setwd("../")                                             # set up workflowr project directory again as a working directory
 }
 
 # render .html files from their original .Rmd files stored in subdirectories
@@ -69,15 +71,13 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
   file_aliases <- base::gsub("/", "--", files)             # change "/" in paths to .Rmd files to generate file names (not paths) with "--", these are new file names of .Rmd files that will be generated in folder "analysis"
   base::mapply(generate_rmd, files, file_aliases, dir)     # generate temporary .Rmd files
 
-  file_aliasesPath <- paste0("analysis/", file_aliases)  # paths to temporary .Rmd files that will be also deleted after .html files are rendered from them
+  file_aliasesPath <- paste0("./analysis/", file_aliases)  # paths to temporary .Rmd files that will be also deleted after .html files are rendered from them
   if (commit == T) {
     workflowr::wflow_git_commit("analysis/*--*Rmd", "commit new .Rmd files from subfolders separately", all = T)
     ###workflowr::wflow_publish("analysis/*--*Rmd", "commit new .Rmd files from subfolders separately")
   }
-
   workflowr::wflow_build(files = file_aliasesPath)         # generate .html files from temporary .Rmd files
   base::invisible(file.remove(paste0("./analysis/", file_aliases)))  # delete temporary .Rmd files from folder "analysis"
-
 
   # parameters
   # dir - a directory in workflowr project directory; it can contain also subfolders
@@ -86,7 +86,7 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
 
 
 # step 5 - execute wflow_build_dir()
-wflow_build_dir(commit = F)
+wflow_build_dir(commit = T)
 
 # step 6 - at this point
 #   - folder "code" contains subfolders with (e.g.) development codes, ...
@@ -98,8 +98,6 @@ wflow_build_dir(commit = F)
 #     because critical is to have perfectly organized .Rmd files rather than .html files and let workflowr to take care of these .html files.
 #   - keep in mind to use correct hyperlinks to future .html files (this shouldn't be a problem)
 
-
-print("stop")
 
 # step 7 - commit/publish, push
 workflowr::wflow_publish(".", "negligible changes in this _preparationSubfolders.R file")
