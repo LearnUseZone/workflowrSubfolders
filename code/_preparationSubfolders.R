@@ -102,9 +102,9 @@ wflow_build_dir(commit = T)
 print("stop")
 
 # step 7 - commit/publish, push
-## workflowr::wflow_publish(".", "changes related to better usage of cat() - uncommited check will be fixed later")
-## workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")    # choose 1 to create a remote repository automatically -> sign-in in loaded web browser to authenticate; choose 2 if a remote repository is already created
-## workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
+workflowr::wflow_publish(".", "fixed workflowr fail because of uncommitted changes")
+workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")    # choose 1 to create a remote repository automatically -> sign-in in loaded web browser to authenticate; choose 2 if a remote repository is already created
+workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 
 
 # used literature
