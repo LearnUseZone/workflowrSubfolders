@@ -69,7 +69,7 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
   file_aliases <- base::gsub("/", "--", files)           # change "/" in paths to .Rmd files to generate file names (not paths) with "--", these are new file names of .Rmd files that will be generated in folder "analysis"
   base::mapply(generate_rmd, files, file_aliases, dir)   # generate temporary .Rmd files
 
-  file_aliasesPath <- paste0("analysis/", file_aliases)  # paths to temporary .Rmd files that will be also deleted after .html files are rendered from them
+  file_aliasesPath <- file.path("analysis", file_aliases)     # paste0("analysis/", file_aliases)  # paths to temporary .Rmd files that will be also deleted after .html files are rendered from them
   if (commit == T) {
     workflowr::wflow_git_commit("analysis/*--*Rmd", "commit new .Rmd files from subfolders separately", all = T)
     ###workflowr::wflow_publish("analysis/*--*Rmd", "commit new .Rmd files from subfolders separately")
@@ -78,7 +78,6 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
   workflowr::wflow_build(files = file_aliasesPath)       # generate .html files from temporary .Rmd files
   base::invisible(file.remove(file_aliasesPath))         # delete temporary .Rmd files from folder "analysis"
 
-
   # parameters
   # dir - a directory in workflowr project directory; it can contain also subfolders
   # commit - TRUE = commit of temporary .Rmd files will be made; choose this commit after these temporary .Rmd files are completely ready
@@ -86,7 +85,7 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
 
 
 # step 5 - execute wflow_build_dir()
-wflow_build_dir(commit = T)
+wflow_build_dir(commit = F)
 
 # step 6 - at this point
 #   - folder "code" contains subfolders with (e.g.) development codes, ...
@@ -98,8 +97,6 @@ wflow_build_dir(commit = T)
 #     because critical is to have perfectly organized .Rmd files rather than .html files and let workflowr to take care of these .html files.
 #   - keep in mind to use correct hyperlinks to future .html files (this shouldn't be a problem)
 
-
-print("stop")
 
 # step 7 - commit/publish, push
 workflowr::wflow_publish(".", "fixed workflowr fail because of uncommitted changes")
