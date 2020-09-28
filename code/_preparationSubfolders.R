@@ -71,7 +71,8 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
   base::mapply(generate_rmd, files, file_aliases, dir)    # generate temporary .Rmd files
 
   if (commit == T) {
-    workflowr::wflow_git_commit("analysis/*--*Rmd", "commit temporary .Rmd files separately", all = T)
+    # ensure that there are no temporary .Rmd files in directory "analysis" otherwise you may receive message like: Error: Commit failed because no files were added.  Attempted to commit the following files: (list of file paths) Any untracked files must manually specified even if `all = TRUE`.
+    workflowr::wflow_git_commit("analysis/*--*Rmd", "commit temporary .Rmd files (subPages3) separately", all = T)
   }
 
   file_aliasesPath <- base::file.path("analysis", file_aliases) # paths to temporary .Rmd files that will be also deleted after .html files are rendered from them
@@ -86,7 +87,7 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
 
 
 # step 5 - execute wflow_build_dir()
-wflow_build_dir(files = NULL, dir = "codeRmd", commit = T)
+wflow_build_dir(files = c("subPages3/testPrint3.Rmd"), dir = "codeRmd", commit = T)
 
 # step 6 - at this point
 #   - folder "code" contains subfolders with (e.g.) development codes, ...

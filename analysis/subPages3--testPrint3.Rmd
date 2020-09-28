@@ -9,7 +9,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-**Source file:** codeRmd/subPages2/testPrint2.Rmd
+**Source file:** codeRmd/subPages3/testPrint3.Rmd
 
-```{r child = base::file.path(knitr::opts_knit$get("output.dir"), "../codeRmd/subPages2/testPrint2.Rmd")}
+```{r child = base::file.path(knitr::opts_knit$get("output.dir"), "../codeRmd/subPages3/testPrint3.Rmd")}
 ```
