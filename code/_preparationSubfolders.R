@@ -29,8 +29,8 @@
 # step 4 - execute generate_rmd() and wflow_build_dir() that are edited codes from [lit 3a]
 # generate temporary .Rmd files from original .Rmd files (saved in subfolders) into folder "analysis"
 generate_rmd <- function(path, alias, dir) {
-  relPath <- base::paste0("../", dir, '/', path)           # relative path to an original .Rmd file that will be rendered to .html file inside function wflow_build_dir(), ../ is used because "analysis" will be "starting directory" for a relative path (see below)
-  setwd("./analysis")                                      # folder where base::cat() will save generated temporary .Rmd files; I didn't find a better placement than right before base::cat() function
+  relPath <- base::paste0("./", dir, '/', path)           # relative path to an original .Rmd file that will be rendered to .html file inside function wflow_build_dir(), ../ is used because "analysis" will be "starting directory" for a relative path (see below)
+  ###setwd("./analysis")                                      # folder where base::cat() will save generated temporary .Rmd files; I didn't find a better placement than right before base::cat() function
   base::cat(
     "---\n",
     yaml::as.yaml(rmarkdown::yaml_front_matter(relPath)),  # YAML header from an original .Rmd file
@@ -41,11 +41,11 @@ generate_rmd <- function(path, alias, dir) {
     # r chunk code (not YAML header)
     "```{r child = file.path(knitr::opts_knit$get(\"output.dir\"), \"", relPath, "\")}\n```",  # [lit 4] - for usage of knitr::opts_knit$get(\"output.dir\")
 
-    file = alias,                                          # a name of file that will be created
+    file = file.path("./", "analysis", alias),                                          # a name of file that will be created
     sep = "",
     append = F                                             # overwrite a content of a file
   )
-  setwd("../")                                             # set up workflowr project directory again as a working directory
+  ###setwd("../")                                             # set up workflowr project directory again as a working directory
 }
 
 # render .html files from their original .Rmd files stored in subdirectories
