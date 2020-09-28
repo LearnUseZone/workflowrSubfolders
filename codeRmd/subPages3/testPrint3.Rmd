@@ -1,0 +1,19 @@
+---
+title: "About SubPages"
+output:
+  workflowr::wflow_html:
+    toc: false
+    pandoc_args: --strip-comments
+    theme: darkly
+editor_options:
+  chunk_output_type: console
+---
+
+This file in folder "subPages3" is for testing of half manual/automated workaround
+to use package workflowr and sub-folders in folder "analysis".
+
+call function from another file
+```{r call_source}
+source("code/subPages3/print3.R")
+```
+
