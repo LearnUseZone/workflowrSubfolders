@@ -29,18 +29,18 @@
 # step 4 - execute generate_rmd() and wflow_build_dir() that are edited codes from [lit 3a]
 # generate temporary .Rmd files from original .Rmd files (saved in subfolders) into folder "analysis"
 generate_rmd <- function(path, alias, dir) {
-  relPath <- file.path(".", dir, path)                     # relative path to an original .Rmd file that will be rendered to .html file inside function wflow_build_dir(), "." is used for setting a correct path in parameter "child" of "r chunk" below
+  relPath <- base::file.path(".", dir, path)                     # relative path to an original .Rmd file that will be rendered to .html file inside function wflow_build_dir(), "." is used for setting a correct path in parameter "child" of "r chunk" below
   base::cat(
     "---\n",
     yaml::as.yaml(rmarkdown::yaml_front_matter(relPath)),  # YAML header from an original .Rmd file
     "---\n\n",
-    "**Source file:** ", file.path(dir, path),             # link to original .Rmd file from workflowr subdirectory
+    "**Source file:** ", base::file.path(dir, path),             # link to original .Rmd file from workflowr subdirectory
     "\n\n",
 
     # r chunk code (not YAML header)
-    "```{r child = file.path(knitr::opts_knit$get(\"output.dir\"), \".", relPath, "\")}\n```",  # [lit 4]; ...\".",... - this dot is REQUIRED here because knitr::opts_knit$get(\"output.dir\") returns "analysis" as output directory in this case so "child" parameter of "r chunk" has to firstly go one directory up (relPath starts with "./")
+    "```{r child = base::file.path(knitr::opts_knit$get(\"output.dir\"), \".", relPath, "\")}\n```",  # [lit 4]; ...\".",... - this dot is REQUIRED here because knitr::opts_knit$get(\"output.dir\") returns "analysis" as output directory in this case so "child" parameter of "r chunk" has to firstly go one directory up (relPath starts with "./")
 
-    file = file.path("analysis", alias),  # a name of file that will be created
+    file = base::file.path("analysis", alias),  # a name of file that will be created
     sep = "",
     append = F                            # overwrite a content of a file
   )
@@ -57,14 +57,15 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
       pattern = "./*.(r|R)md"
     )
   }
-  # currently not used
-  # else {
-  #   for (file in files) {
-  #     path<-base::paste0(dir, "/", file)
-  #     if (!file.exists(paste0('../', path)))
-  #       stop(base::paste0("File doesn't exist: ./", path))
-  #   }
-  # }
+
+  # check existence of files manually specified in variable "files"
+  else {
+    for (file in files) {
+      path <- base::file.path(dir, file)
+      if (!base::file.exists(path))
+        stop(base::paste0("File doesn't exist: ", path))  # if a file doesn't exist a message is written and code stops
+      }
+  }
 
   file_aliases <- base::gsub("/", "--", files)            # change "/" in paths to .Rmd files to generate file names (not paths) with "--", these are new file names of .Rmd files that will be generated in folder "analysis"
   base::mapply(generate_rmd, files, file_aliases, dir)    # generate temporary .Rmd files
@@ -73,18 +74,19 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
     workflowr::wflow_git_commit("analysis/*--*Rmd", "commit temporary .Rmd files separately", all = T)
   }
 
-  file_aliasesPath <- file.path("analysis", file_aliases) # paths to temporary .Rmd files that will be also deleted after .html files are rendered from them
+  file_aliasesPath <- base::file.path("analysis", file_aliases) # paths to temporary .Rmd files that will be also deleted after .html files are rendered from them
   workflowr::wflow_build(files = file_aliasesPath)        # generate .html files from temporary .Rmd files
   base::invisible(file.remove(file_aliasesPath))          # delete temporary .Rmd files from folder "analysis"
 
   # parameters
+  # files = vector of paths to original .Rmd files; these paths start with a name of the 1st subdirectory of a directory specified in variable "dir"; example: files = c("subPages4/testPrint4.Rmd", "subPages2/testPrint2.Rmd")
   # dir - a directory in workflowr project directory; it can contain also subfolders
   # commit - TRUE = commit of temporary .Rmd files will be made; choose this commit after these temporary .Rmd files are completely ready
 }
 
 
 # step 5 - execute wflow_build_dir()
-wflow_build_dir(commit = T)
+wflow_build_dir(files = NULL, dir = "codeRmd", commit = T)
 
 # step 6 - at this point
 #   - folder "code" contains subfolders with (e.g.) development codes, ...
@@ -98,9 +100,9 @@ wflow_build_dir(commit = T)
 
 
 # step 7 - commit/publish, push
-workflowr::wflow_publish(".", "_preparationSubfolders.R - negligible changes")
-workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")    # choose 1 to create a remote repository automatically -> sign-in in loaded web browser to authenticate; choose 2 if a remote repository is already created
-workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
+## workflowr::wflow_publish(".", "_preparationSubfolders.R - negligible changes")
+## workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")    # choose 1 to create a remote repository automatically -> sign-in in loaded web browser to authenticate; choose 2 if a remote repository is already created
+## workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 
 
 # used literature
