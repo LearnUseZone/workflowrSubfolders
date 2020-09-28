@@ -67,19 +67,18 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
       }
   }
 
-  file_aliases <- base::gsub("/", "--", files)            # change "/" in paths to .Rmd files to generate file names (not paths) with "--", these are new file names of .Rmd files that will be generated in folder "analysis"
-  base::mapply(generate_rmd, files, file_aliases, dir)    # generate temporary .Rmd files
+  file_aliases <- base::gsub("/", "--", files)                                            # change "/" in paths to .Rmd files to generate file names (not paths) with "--", these are new file names of .Rmd files that will be generated in folder "analysis"
+  file_aliasesPath <- base::file.path("analysis", file_aliases)                           # paths to temporary .Rmd files that will be also deleted after .html files are rendered from them
+  file.remove(file.path("analysis", dir(path = "analysis", pattern = ".*\\-\\-.*.Rmd")))  # ensure that there are no temporary .Rmd files in directory "analysis" otherwise you may receive message like following one after trying to run function wflow_git_commit(...): Error: Commit failed because no files were added. Attempted to commit the following files: (list of file paths) Any untracked files must manually specified even if `all = TRUE`.
 
+  base::mapply(generate_rmd, files, file_aliases, dir)                                    # generate temporary .Rmd files
   if (commit == T) {
-    # ensure that there are no temporary .Rmd files in directory "analysis" otherwise you may receive message like: Error: Commit failed because no files were added.  Attempted to commit the following files: (list of file paths) Any untracked files must manually specified even if `all = TRUE`.
     workflowr::wflow_git_commit("analysis/*--*Rmd", "commit temporary .Rmd files (subPages3) separately", all = T)
   }
+  workflowr::wflow_build(files = file_aliasesPath)  # generate .html files from temporary .Rmd files
+  file.remove(file_aliasesPath)                     # delete temporary .Rmd files from folder "analysis"
 
-  file_aliasesPath <- base::file.path("analysis", file_aliases) # paths to temporary .Rmd files that will be also deleted after .html files are rendered from them
-  workflowr::wflow_build(files = file_aliasesPath)        # generate .html files from temporary .Rmd files
-  base::invisible(file.remove(file_aliasesPath))          # delete temporary .Rmd files from folder "analysis"
-
-  # parameters
+  # input parameters
   # files = vector of paths to original .Rmd files; these paths start with a name of the 1st subdirectory of a directory specified in variable "dir"; example: files = c("subPages4/testPrint4.Rmd", "subPages2/testPrint2.Rmd")
   # dir - a directory in workflowr project directory; it can contain also subfolders
   # commit - TRUE = commit of temporary .Rmd files will be made; choose this commit after these temporary .Rmd files are completely ready
