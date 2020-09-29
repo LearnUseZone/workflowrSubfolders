@@ -14,7 +14,7 @@ to use package workflowr and sub-folders in folder "analysis".
 
 call function from another file
 ```{r call_source}
-source("code/subPages2/print2.R")
+source("code/subPages2/print2.R", local = knitr::knit_global())
 ```
 
 <!-- # I want to not display this comment thanks to using "--strip-comments" -->

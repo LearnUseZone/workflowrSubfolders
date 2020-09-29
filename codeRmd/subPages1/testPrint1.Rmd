@@ -12,7 +12,7 @@ to use package workflowr and sub-folders in folder "analysis".
 
 call function from another file
 ```{r call_source}
-source("code/subPages1/print1.R")
+source("code/subPages1/print1.R", local = knitr::knit_global())
 ```
 
 ```{r hidden_comments, include = FALSE}
@@ -20,4 +20,5 @@ source("code/subPages1/print1.R")
 # [lit 1]  https://github.com/jdblischak/workflowr/issues/220
 # [lit 1a] https://github.com/jdblischak/workflowr/issues/220#issuecomment-699083120 - why here::here() is not used
 # [lit 2]  https://jdblischak.github.io/workflowr/articles/wflow-07-common-code.html
+# [lit 3]  https://bookdown.org/yihui/rmarkdown-cookbook/source-script.html - usage of local = knitr::knit_global()
 ```

@@ -1,0 +1,13 @@
+---
+title: About SubPages
+output:
+  workflowr::wflow_html:
+    toc: no
+editor_options:
+  chunk_output_type: console
+---
+
+**Source file:** codeRmd/subPages1/testPrint1.Rmd
+
+```{r child = base::file.path(knitr::opts_knit$get("output.dir"), "../codeRmd/subPages1/testPrint1.Rmd")}
+```

@@ -79,13 +79,13 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
   file.remove(file_aliasesPath)                     # delete temporary .Rmd files from folder "analysis"
 
   # input parameters
-  # files = vector of paths to original .Rmd files; these paths start with a name of the 1st subdirectory of a directory specified in variable "dir"; example: files = c("subPages4/testPrint4.Rmd", "subPages2/testPrint2.Rmd")
+  # files = vector of paths to original .Rmd files; these paths start with a name of the 1st subdirectory of a directory specified in variable "dir"; example: files = c("subPages2/testPrint2.Rmd", "subPages3/testPrint3.Rmd")
   # dir - a directory in workflowr project directory; it can contain also subfolders
   # commit - TRUE = commit of temporary .Rmd files will be made; choose this commit after these temporary .Rmd files are completely ready
 }
 
 # step 5 - execute wflow_build_dir()
-wflow_build_dir(files = c("subPages3/testPrint3.Rmd"), dir = "codeRmd", commit = T)
+wflow_build_dir(files = NULL, dir = "codeRmd", commit = T)
 
 # step 6 - at this point
 #   - folder "code" contains subfolders with (e.g.) development codes, ...
