@@ -13,7 +13,11 @@ This file in folder "subPages3" is for testing of half manual/automated workarou
 to use package workflowr and sub-folders in folder "analysis".
 
 call function from another file using argument "code" in the r chunk
-```{r call_source}
-source("code/subPages3/print3.R", local = knitr::knit_global())
+```{r call_source, code = xfun::read_utf8(base::file.path(knitr::opts_knit$get("output.dir"),  "../code/subPages3/print3.R"))}
+# used literature
+# https://bookdown.org/yihui/rmarkdown-cookbook/option-code.html -> code option of an r chunk doesn't have disadvantages of the source() method
 ```
 
+```{r additional_comment}
+# [me:] Displaying comments for r chunk with argument "code" is not possible and has to be inserted into another r chunk.
+```

@@ -98,7 +98,7 @@ wflow_build_dir(files = c("subPages3/testPrint3.Rmd"), dir = "codeRmd", commit =
 #   - keep in mind to use correct hyperlinks to future .html files (this shouldn't be a problem)
 
 # step 7 - commit/publish, push
-## workflowr::wflow_publish(".", "added: local = knitr::knit_global() to original .Rmd files")
+## workflowr::wflow_publish(".", "updated: argument 'code' in the r chunk")
 ## workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")    # choose 1 to create a remote repository automatically -> sign-in in loaded web browser to authenticate; choose 2 if a remote repository is already created
 ## workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 
