@@ -12,7 +12,7 @@ editor_options:
 This file in folder "subPages3" is for testing of half manual/automated workaround
 to use package workflowr and sub-folders in folder "analysis".
 
-call function from another file
+call function from another file using argument "code" in the r chunk
 ```{r call_source}
 source("code/subPages3/print3.R", local = knitr::knit_global())
 ```

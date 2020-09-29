@@ -17,4 +17,4 @@ call function from another file
 source("code/subPages2/print2.R", local = knitr::knit_global())
 ```
 
-<!-- # I want to not display this comment thanks to using "--strip-comments" -->
+<!-- # I don't want to display this comment thanks to using "--strip-comments" -->
