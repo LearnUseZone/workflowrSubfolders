@@ -73,7 +73,7 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
 
   base::mapply(generate_rmd, files, file_aliases, dir)                                    # generate temporary .Rmd files
   if (commit == T) {
-    workflowr::wflow_git_commit("analysis/*--*Rmd", "commit temporary .Rmd files (subPages3) separately", all = T)
+    workflowr::wflow_git_commit("analysis/*--*Rmd", "separate commit of temporary .Rmd files", all = T)
   }
   workflowr::wflow_build(files = file_aliasesPath)  # generate .html files from temporary .Rmd files
   file.remove(file_aliasesPath)                     # delete temporary .Rmd files from folder "analysis"
@@ -98,7 +98,7 @@ wflow_build_dir(files = NULL, dir = "codeRmd", commit = T)
 #   - keep in mind to use correct hyperlinks to future .html files (this shouldn't be a problem)
 
 # step 7 - commit/publish, push
-workflowr::wflow_publish(".", "_preparationSubfolders.R - negligible updates; index.html - web link to testPrint3.html")
+workflowr::wflow_publish(".", "added: local = knitr::knit_global() to original .Rmd files")
 workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")    # choose 1 to create a remote repository automatically -> sign-in in loaded web browser to authenticate; choose 2 if a remote repository is already created
 workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 
