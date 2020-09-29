@@ -424,16 +424,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomLearnUseZoneworkflowrSubfolderstree399d9cc25e9fc5b76da6d20792687141abd1a684targetblank399d9cca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/LearnUseZone/workflowrSubfolders/tree/399d9cc25e9fc5b76da6d20792687141abd1a684" target="_blank">399d9cc</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomLearnUseZoneworkflowrSubfolderstree172638fc92c383dbcef2a96f6e4b5cc67863e41btargetblank172638fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/LearnUseZone/workflowrSubfolders/tree/172638fc92c383dbcef2a96f6e4b5cc67863e41b" target="_blank">172638f</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomLearnUseZoneworkflowrSubfolderstree399d9cc25e9fc5b76da6d20792687141abd1a684targetblank399d9cca" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomLearnUseZoneworkflowrSubfolderstree172638fc92c383dbcef2a96f6e4b5cc67863e41btargetblank172638fa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/LearnUseZone/workflowrSubfolders/tree/399d9cc25e9fc5b76da6d20792687141abd1a684" target="_blank">399d9cc</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/LearnUseZone/workflowrSubfolders/tree/172638fc92c383dbcef2a96f6e4b5cc67863e41b" target="_blank">172638f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -442,9 +442,7 @@ Note that you need to be careful to ensure that all relevant files for the analy
 Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-
-Unstaged changes:
-    Modified:   code/_preparationSubfolders.R
+    Ignored:    code/subPages1/.Rhistory
 
 </code></pre>
 <p>
@@ -483,6 +481,57 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/LearnUseZone/workflowrSubfolders/blob/333a2d0a7bb0ef52161eaf52a92b0ae82220170c/analysis/subPages3--testPrint3.Rmd" target="_blank">333a2d0</a>
+</td>
+<td>
+LearnUseZone
+</td>
+<td>
+2020-09-29
+</td>
+<td>
+separate commit of temporary .Rmd files
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/LearnUseZone/workflowrSubfolders/blob/8462c46a2787c8c5da238dd766df34a214a12dae/analysis/subPages3--testPrint3.Rmd" target="_blank">8462c46</a>
+</td>
+<td>
+LearnUseZone
+</td>
+<td>
+2020-09-29
+</td>
+<td>
+added: local = knitr::knit_global() to
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/LearnUseZone/workflowrSubfolders/8462c46a2787c8c5da238dd766df34a214a12dae/docs/subPages3--testPrint3.html" target="_blank">8462c46</a>
+</td>
+<td>
+LearnUseZone
+</td>
+<td>
+2020-09-29
+</td>
+<td>
+added: local = knitr::knit_global() to
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -679,9 +728,9 @@ working relative path in temporary .Rmd -
 </div>
 <p><strong>Source file:</strong> codeRmd/subPages3/testPrint3.Rmd</p>
 <p>This file in folder “subPages3” is for testing of half manual/automated workaround to use package workflowr and sub-folders in folder “analysis”.</p>
-<p>call function from another file</p>
+<p>call function from another file using argument “code” in the r chunk</p>
 <pre class="r"><code>source(&quot;code/subPages3/print3.R&quot;, local = knitr::knit_global())</code></pre>
-<pre><code>[1] &quot;File used for testing &#39;else&#39; condition in wflow_build_dir().&quot;</code></pre>
+<pre><code>[1] &quot;File used to test:\n1) &#39;else&#39; condition in wflow_build_dir(),\n2) argument \&quot;code\&quot; in the r chunk&quot;</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
