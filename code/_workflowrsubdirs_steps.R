@@ -20,12 +20,22 @@ devtools::create("code/workflowrsubdirs")
 # Create 1 function with 1 description per 1 .R file into these new .R files.
 
 
-# I'm currently creating those functions and descriptions???
+# step 3
+devtools::document("code/workflowrsubdirs")
+devtools::install("code/workflowrsubdirs")  # also for re-installing a package after a made change
+
+
+# step 4 - test
+workflowrsubdirs::generate.rmd()
+
 
 # notes:
 #  - possible code for committing new files relevant to package workflowrsubdirsUDP (redesign it to workflowrsubdirs)
-#  workflowr::wflow_git_commit(files = c("code/_workflowrsubdirsUDP_steps.R", "code/workflowrsubdirsUDP/*"), "added: files for package")
-
+#  workflowr::wflow_git_commit(
+#    files = c("code/_workflowrsubdirs_steps.R", "code/workflowrsubdirs/*"),
+#    message = "added: files for package",
+#    all = T
+#  )
 
 
 
