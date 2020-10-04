@@ -2,8 +2,7 @@
 # Additional information is in [lit 1]
 # ----
 
-
-# step 1 - ensure that index.html is already created in folder "docs" (using workflowr::wflow_build())
+# step 1 - ensure that index.html is already created in directory "docs" (using workflowr::wflow_build())
 #   - otherwise you can receive error like follows:
 #   Error in wflow_view(index, project = project) :
 #     No HTML files were able to viewed.  Try running
@@ -15,19 +14,20 @@
 #     No HTML files were able to viewed.  Try running
 #   `wflow_build()` first.
 
-# step 2 - create suitable subfolders
-#  Folder "workflowr project directory/code": This directory is for code that might not be appropriate to include
+# step 2 - create suitable subdirectories
+#  Directory "workflowr project directory/code": This directory is for code that might not be appropriate to include
 #    in R Markdown format (e.g. for pre-processing the data, or for long-running code). [lit 2]
-#    For organizational purposes: don't write save .Rmd files here, create suitable subfolders here. [me]
-#  Create "workflowr project directory/codeRmd" folder (with further additional subfolder names that are same as "workflowr project directory/code" subfolder names)
-#    for .Rmd files associated to files within relevant "workflowr project directory/code" subfolders. [me]
+#    For organizational purposes: don't write save .Rmd files here, create suitable subdirectories here. [me]
+#  Create "workflowr project directory/codeRmd" directory (with further additional subdirectory names
+#    that are same as "workflowr project directory/code" subdirectory names) for .Rmd files associated
+#    to files within relevant "workflowr project directory/code" subdirectories. [me]
 #    Important: Don't use "analysis/codeRmd" otherwise following error pops-up when using workflowr::wflow_publish(...)
 #      Error in to_html(files_analysis, outdir = o$docs) : Invalid file extension
 
 # step 3 - ensure that ./analysis is the working directory
 
 # step 4 - execute generate_rmd() and wflow_build_dir() that are edited codes from [lit 3a]
-# generate temporary .Rmd files from original .Rmd files (saved in subfolders) into folder "analysis"
+# generate temporary .Rmd files from original .Rmd files (saved in subdirectories) into directory "analysis"
 generate_rmd <- function(path, alias, dir) {
   relPath <- base::file.path(".", dir, path)               # relative path to an original .Rmd file that will be rendered to .html file inside function wflow_build_dir(), "." is used for setting a correct path in parameter "child" of "r chunk" below
   base::cat(
@@ -50,7 +50,7 @@ generate_rmd <- function(path, alias, dir) {
 wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
   setwd(here::here())           # set workflowr project directory as a working directory (just in case it's not set already)
   if (base::is.null(files)) {
-    files <- list.files(        # generate paths (not only file names) to .Rmd files in subfolders under folder in parameter "dir"
+    files <- list.files(        # generate paths (not only file names) to .Rmd files in subdirectories under directory in parameter "dir"
       dir,
       recursive = T,
       include.dirs = T,
@@ -67,7 +67,7 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
       }
   }
 
-  file_aliases <- base::gsub("/", "--", files)                                            # change "/" in paths to .Rmd files to generate file names (not paths) with "--", these are new file names of .Rmd files that will be generated in folder "analysis"
+  file_aliases <- base::gsub("/", "--", files)                                            # change "/" in paths to .Rmd files to generate file names (not paths) with "--", these are new file names of .Rmd files that will be generated in directory "analysis"
   file_aliasesPath <- base::file.path("analysis", file_aliases)                           # paths to temporary .Rmd files that will be also deleted after .html files are rendered from them
   file.remove(file.path("analysis", dir(path = "analysis", pattern = ".*\\-\\-.*.Rmd")))  # ensure that there are no temporary .Rmd files in directory "analysis" otherwise you may receive message like following one after trying to run function wflow_git_commit(...): Error: Commit failed because no files were added. Attempted to commit the following files: (list of file paths) Any untracked files must manually specified even if `all = TRUE`.
 
@@ -76,11 +76,11 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
     workflowr::wflow_git_commit("analysis/*--*Rmd", "separate commit of temporary .Rmd files", all = T)
   }
   workflowr::wflow_build(files = file_aliasesPath)  # generate .html files from temporary .Rmd files
-  file.remove(file_aliasesPath)                     # delete temporary .Rmd files from folder "analysis"
+  file.remove(file_aliasesPath)                     # delete temporary .Rmd files from directory "analysis"
 
   # input parameters
   # files = vector of paths to original .Rmd files; these paths start with a name of the 1st subdirectory of a directory specified in variable "dir"; example: files = c("subPages2/testPrint2.Rmd", "subPages3/testPrint3.Rmd")
-  # dir - a directory in workflowr project directory; it can contain also subfolders
+  # dir - a directory in workflowr project directory; it can contain also subdirectories
   # commit - TRUE = commit of temporary .Rmd files will be made; choose this commit after these temporary .Rmd files are completely ready
 }
 
@@ -88,17 +88,17 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
 wflow_build_dir(files = c("subPages3/testPrint3.Rmd"), dir = "codeRmd", commit = T)
 
 # step 6 - at this point
-#   - folder "code" contains subfolders with (e.g.) development codes, ...
-#   - folder "codeRmd" contains subfolders with .Rmd files associated with development codes, ...
+#   - directory "code" contains subdirectories with (e.g.) development codes, ...
+#   - directory "codeRmd" contains subdirectories with .Rmd files associated with development codes, ...
 #   - more efficient way (less manual work) of creating .html files is prepared in comparison with steps on 19-09-17
 #     plus a potential problem with the workflowr reproducibility checks [lit 1a] is resolved.
-#   - folder "docs" contains .html files created from .Rmd files from folder "codeRmd" but although I'd like to have them in an appropriate subfolders instead of using delimiters like "--"
+#   - directory "docs" contains .html files created from .Rmd files from directory "codeRmd" but although I'd like to have them in an appropriate subdirectories instead of using delimiters like "--"
 #     (so maybe similar steps like on 19-09-17 in "step 4" and "step 5" should be applied), I will accept usage of these delimiters
 #     because critical is to have perfectly organized .Rmd files rather than .html files and let workflowr to take care of these .html files.
 #   - keep in mind to use correct hyperlinks to future .html files (this shouldn't be a problem)
 
 # step 7 - commit/publish, push
-workflowr::wflow_publish(".", "updated: argument 'code' in the r chunk")
+workflowr::wflow_publish(".", "updated: text in _preparationSubfolders.R")
 workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")    # choose 1 to create a remote repository automatically -> sign-in in loaded web browser to authenticate; choose 2 if a remote repository is already created
 workflowr::wflow_git_push()  # enter username and password (if SSH is not set)
 
