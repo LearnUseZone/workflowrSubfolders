@@ -2,9 +2,9 @@
 
 # step 1
 base::setwd("D:\\Cloud\\Sync\\Study\\Programming\\R\\Work\\Projects\\GitHub\\workflowrSubfolders")
-devtools::create("code/workflowrsubdirsUDP")
-# Following message appears:
-#   New project 'workflowrsubdirsUDP' is nested inside an existing project 'code/', which is rarely a good idea.
+devtools::create("code/workflowrsubdirs")
+# Following message appears (shown options for Selection may differ each time):
+#   New project 'workflowrsubdirs' is nested inside an existing project 'code/', which is rarely a good idea.
 #   If this is unexpected, the here package has a function, `here::dr_here()` that reveals why 'code/' is regarded as a project.
 #   Do you want to create anyway?
 
@@ -19,7 +19,14 @@ devtools::create("code/workflowrsubdirsUDP")
 # Create new .R files in directory "code/workflowrsubdirsUDP/R": generate.rmd.R, generate.subdir.R
 # Create 1 function with 1 description per 1 .R file into these new .R files.
 
+
 # I'm currently creating those functions and descriptions???
+
+# notes:
+#  - possible code for committing new files relevant to package workflowrsubdirsUDP (redesign it to workflowrsubdirs)
+#  workflowr::wflow_git_commit(files = c("code/_workflowrsubdirsUDP_steps.R", "code/workflowrsubdirsUDP/*"), "added: files for package")
+
+
 
 
 # used literature
