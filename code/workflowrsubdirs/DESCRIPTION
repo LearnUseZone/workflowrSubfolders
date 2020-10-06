@@ -1,14 +1,9 @@
 Package: workflowrsubdirs
 Title: Extension for Package workflowr to Generate Web Pages from Subdirectories
 Version: 0.0.0.0001
-Authors@R: 
-    person(given = "LearnUseZone",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Maintainer: LearnUseZone
-Description: Create web pages from Rmd files saved in workflowr subdirectories.
+Author: LearnUseZone
+Maintainer: aaa <aaa@aaa.net>
+Description: Create web pages from .Rmd files saved in workflowr subdirectories.
 License: `use_mit_license()`, `use_gpl3_license()`
 Encoding: UTF-8
 LazyData: true
