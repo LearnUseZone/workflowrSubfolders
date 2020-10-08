@@ -6,6 +6,7 @@
 #' These generated .Rmd files are meant to be temporary and they will be deleted after \code{\link{generate_subdir}} generates final .html files.
 #' If you want to use this function in other way than call it from \code{\link{generate_subdir}} then you have to set a correct workflowr project to be your working directory,
 #' e.g. by running: setwd("D:/Cloud/Sync/Study/Programming/R/Work/Projects/GitHub/workflowrSubfolders")
+#' example: #' generate_rmd("codeRmd", "subPages1/testPrint1.Rmd", "subPages1--testPrint1.Rmd")
 #' @param dir
 #' character (default: "codeRmd") path to a directory, under a main workflowr subdirectory, where an original Rmd file is saved.
 #' @param path
@@ -15,13 +16,10 @@
 #' Name ("--" is usually part of it's name) of a temporary .Rmd file that will be saved into directory "analysis".
 #' This temporary file is generated from its original Rmd file specified in path, then it will be deleted within generate.subdir.
 #' @keywords workflowr, subdirectory
-#' @return
-#' @export
+#' @return <return>
+#' @export generate_rmd
 #' @examples
-#' generate_rmd("codeRmd", "subPages1/testPrint1.Rmd", "subPages1--testPrint1.Rmd")
-
-usethis::use_package("yaml")
-usethis::use_package("rmarkdown")
+#' print("a")
 
 generate_rmd <- function(dir = "codeRmd", path = NULL, temp_file = NULL) {
   relPath <- base::file.path(".", dir, path)               # relative path to an original .Rmd file that will be rendered to .html file inside function wflow_build_dir(), "." is used for setting a correct path in parameter "child" of "r chunk" below
