@@ -20,10 +20,8 @@
 #' @examples
 #' generate_rmd("codeRmd", "subPages1/testPrint1.Rmd", "subPages1--testPrint1.Rmd")
 
-
-#' https://www.youtube.com/watch?v=79s3z0gIuFU time 07:30 - 07:40 - upravim???
-#' used literature: _preparationSubfolders.R
-
+usethis::use_package("yaml")
+usethis::use_package("rmarkdown")
 
 generate_rmd <- function(dir = "codeRmd", path = NULL, temp_file = NULL) {
   relPath <- base::file.path(".", dir, path)               # relative path to an original .Rmd file that will be rendered to .html file inside function wflow_build_dir(), "." is used for setting a correct path in parameter "child" of "r chunk" below
