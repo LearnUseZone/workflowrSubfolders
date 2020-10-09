@@ -66,7 +66,7 @@ In that case, don't forget to commit and push the resulting figure files, so the
 ----
 Example for function generate_rmd is set to don't run so if you decide to run devtools::check() the check of following example will not run.
 generate_rmd("codeRmd", "subPages1/testPrint1.Rmd", "subPages1--testPrint1.Rmd")
-The reason why it's set to don't run is that this package is meant to be an enhancement of package workflowr which means that this package workflowrsubdirs needs to have the same structure of some folders (analysis, code, codeRmd) as packages workflorsubdirs, otherwise showed example will fail (or you would need to adjust code lines referencing to any kind of path which is contraproductive to just do it only because of testing).
+The reason why it's set to don't run is that this package is meant to be an enhancement of package workflowr which means that this package workflowrsubdirs needs to have the same structure of some folders (analysis, code, codeRmd, docs) as packages workflorsubdirs, otherwise showed example will fail (or you would need to adjust code lines referencing to any kind of path which is contraproductive to just do it only because of testing).
 
 
 --
