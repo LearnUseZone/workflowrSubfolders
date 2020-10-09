@@ -85,7 +85,7 @@ wflow_build_dir <- function(files = NULL, dir = "codeRmd", commit = F, ...) {
 }
 
 # step 5 - execute wflow_build_dir()
-wflow_build_dir(files = c("subPages3/testPrint3.Rmd"), dir = "codeRmd", commit = F)
+wflow_build_dir(files = c("subPages1/testPrint1.Rmd"), dir = "codeRmd", commit = F)
 
 # step 6 - at this point
 #   - directory "code" contains subdirectories with (e.g.) development codes, ...

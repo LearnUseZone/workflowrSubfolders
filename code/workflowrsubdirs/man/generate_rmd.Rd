@@ -27,7 +27,9 @@ e.g. by running: setwd("D:/Cloud/Sync/Study/Programming/R/Work/Projects/GitHub/w
 example: #' generate_rmd("codeRmd", "subPages1/testPrint1.Rmd", "subPages1--testPrint1.Rmd")
 }
 \examples{
-print("a")
+\dontrun{
+  generate_rmd("codeRmd", "subPages1/testPrint1.Rmd", "subPages1--testPrint1.Rmd")
+}
 }
 \keyword{subdirectory}
 \keyword{workflowr,}

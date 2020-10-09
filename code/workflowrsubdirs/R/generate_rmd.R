@@ -1,5 +1,4 @@
 #' @title Generate temporary .Rmd files
-#'
 #' @description
 #' This is one of functions serving as optional extension for workflowr package in order to be able to generate .html files from .Rmd files saved in subdirectories and not only in directory "analysis".
 #' \code{generate_rmd} generates .Rmd files from original .Rmd files that are saved in subdirectories and save them into directory "analysis".
@@ -19,7 +18,9 @@
 #' @return <return>
 #' @export generate_rmd
 #' @examples
-#' print("a")
+#' \dontrun{
+#'   generate_rmd("codeRmd", "subPages1/testPrint1.Rmd", "subPages1--testPrint1.Rmd")
+#' }
 
 generate_rmd <- function(dir = "codeRmd", path = NULL, temp_file = NULL) {
   relPath <- base::file.path(".", dir, path)               # relative path to an original .Rmd file that will be rendered to .html file inside function wflow_build_dir(), "." is used for setting a correct path in parameter "child" of "r chunk" below

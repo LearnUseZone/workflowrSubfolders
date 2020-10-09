@@ -1,0 +1,86 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# workflowrsubdirs
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of workflowrsubdirs is to ...
+
+## Installation
+
+You can install the released version of workflowrsubdirs from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("workflowrsubdirs")
+```
+
+And the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("LearnUseZone/workflowrSubfolders")
+```
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(workflowrsubdirs)
+## basic example code
+```
+
+What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+
+```{r cars}
+summary(cars)
+```
+
+You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
+
+You can also embed plots, for example:
+
+```{r pressure, echo = FALSE}
+plot(pressure)
+```
+
+In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
+
+
+
+## Info (PP)
+----
+----
+Example for function generate_rmd is set to don't run so if you decide to run devtools::check() the check of following example will not run.
+generate_rmd("codeRmd", "subPages1/testPrint1.Rmd", "subPages1--testPrint1.Rmd")
+The reason why it's set to don't run is that this package is meant to be an enhancement of package workflowr which means that this package workflowrsubdirs needs to have the same structure of some folders (analysis, code, codeRmd) as packages workflorsubdirs, otherwise showed example will fail (or you would need to adjust code lines referencing to any kind of path which is contraproductive to just do it only because of testing).
+
+
+--
+
+
+function wflow_build_dir()
+----
+attention for next function: if I open a project double-clicking on .Rproj file that has another working directory path than a relelevant workflowr project then this function setwd(here::here()) set a working directory to this .Rproj working directory out of workflowr project working directory and function wflow_build_dir fails because a relevant folder specified in parameter "dir" will not exist
+setwd(here::here())           # set workflowr project directory as a working directory (just in case it's not set already)
+
+
+"D:\Cloud\Sync\Study\Programming\R\Work\Projects\GitHub\workflowrSubfolders\code\workflowrsubdirs\tests\testthat\test-generate_rmd.R"
+----
+For now - only placeholder
+
+
+
