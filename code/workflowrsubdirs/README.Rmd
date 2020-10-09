@@ -72,10 +72,13 @@ The reason why it's set to don't run is that this package is meant to be an enha
 --
 
 
-function wflow_build_dir()
+function generate_subdir()
 ----
 attention for next function: if I open a project double-clicking on .Rproj file that has another working directory path than a relelevant workflowr project then this function setwd(here::here()) set a working directory to this .Rproj working directory out of workflowr project working directory and function wflow_build_dir fails because a relevant folder specified in parameter "dir" will not exist
 setwd(here::here())           # set workflowr project directory as a working directory (just in case it's not set already)
+
+When this function is completed, a new .html file is prepared in folder "docs" (for GitHub) or folder "public" (for GitLab) but under workflowr button -> Checks you can find "R Markdown file: uncommitted changes". This is in line with workflowr package. That means that also your temporary files were commited separately, you need to commit also these new .html files.
+
 
 
 "D:\Cloud\Sync\Study\Programming\R\Work\Projects\GitHub\workflowrSubfolders\code\workflowrsubdirs\tests\testthat\test-generate_rmd.R"
@@ -83,4 +86,5 @@ setwd(here::here())           # set workflowr project directory as a working dir
 For now - only placeholder
 
 
+Similarly as for workflowr package, when specifying path to folders or files in functions generate_rmd() and generate_subdir(), you can start by typing folder name, so for example, you can write "analysis" instead of "./analysis".
 

@@ -6,9 +6,11 @@
 #' If you want to use this function in other way than call it from \code{\link{generate_subdir}} then you have to set a correct workflowr project to be your working directory,
 #' e.g. by running: setwd("D:/Cloud/Sync/Study/Programming/R/Work/Projects/GitHub/workflowrSubfolders")
 #' @param dir
-#' character (default: "codeRmd") path to a directory, under a main workflowr subdirectory, where an original Rmd file is saved.
+#' character (default: "codeRmd").
+#' Path to a directory, under a main workflowr subdirectory, where original Rmd files are saved.
 #' @param path
-#' character (default: NULL). Path to an original .Rmd file saved in a dir or in a dir's subdirectory.
+#' character (default: NULL).
+#' Path to an original .Rmd file saved in a dir or in a dir's subdirectory.
 #' @param temp_file
 #' character (default: NULL).
 #' Name ("--" is usually part of it's name) of a temporary .Rmd file that will be saved into directory "analysis".
@@ -38,3 +40,4 @@ generate_rmd <- function(dir = "codeRmd", file_path = NULL, temp_file = NULL) {
     append = F                                      # overwrite a content of a file
   )
 }
+

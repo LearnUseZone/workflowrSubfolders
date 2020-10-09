@@ -1,29 +1,21 @@
-#' @title Render .html files from their original .Rmd files stored in subdirectories
-#' @description
-#' This is one of functions serving as optional extension for workflowr package in order to be able to generate .html files from .Rmd files saved in subdirectories and not only in directory "analysis".
-#' \code{generate_subdir} firstly generates temp_file names that are generated from the path were a relevant original .Rmd file is saved by substituing "/" to "--".
-#' Then function \code{\link{generate_rmd}} is applied for all specified original .Rmd files (saved in subdirectories).
-#' Finally, all temporary .Rmd files (containing "--") are deleted from directory "analysis".
-#' If you want to use this function in other way than call it from \code{\link{generate_subdir}} then you have to set a correct workflowr project to be your working directory,
-#' e.g. by running: setwd("D:/Cloud/Sync/Study/Programming/R/Work/Projects/GitHub/workflowrSubfolders")
-#' @param dir
-#' character (default: "codeRmd").
-#' Path to a directory, under a main workflowr subdirectory, where original Rmd files are saved.
-#' @param file_path
-#' character (default: NULL).
-#' Vector of paths to original .Rmd files. These file paths start with a name of the 1st subdirectory of a directory specified in variable "dir".
-#' Example when directories subPagesX are saved in folder dir = "codeRmd": file_path = c("subPages2/testPrint2.Rmd", "subPages3/testPrint3.Rmd")
-#' @param commit
-#' character (default: FALSE).
-#' commit = TRUE creates a separate commit of temporary .Rmd files (temporary saved in directory "analysis").
-#' Suggestion: Use commit = TRUE only after your original .Rmd files saved in subdirectories are tested properly and so are completely ready, otherwise you could have pointlessly many commits.
-#' @keywords workflowr, subdirectory
-#' @return <return>
-#' @export generate_subdir
-#' @examples
-#' \dontrun{
-#'   generate_subdir(file_path = c("subPages1/testPrint1.Rmd", "subPages2/testPrint2.Rmd"), dir = "codeRmd", commit = T)
-#' }
+generate_rmd <- function(dir = "codeRmd", file_path = NULL, temp_file = NULL) {
+  relPath <- base::file.path(".", dir, file_path)               # relative path to an original .Rmd file that will be rendered to .html file inside function wflow_build_dir(), "." is used for setting a correct path in parameter "child" of "r chunk" below
+  base::cat(
+    "---\n",
+    yaml::as.yaml(rmarkdown::yaml_front_matter(relPath)),  # YAML header from an original .Rmd file
+    "---\n\n",
+    "**Source file:** ", base::file.path(dir, file_path),       # link to original .Rmd file from workflowr subdirectory
+    "\n\n",
+
+    # r chunk code (not YAML header)
+    "```{r child = base::file.path(knitr::opts_knit$get(\"output.dir\"), \".", relPath, "\")}\n```",  # [lit 4]; ...\".",... - this dot is REQUIRED here because knitr::opts_knit$get(\"output.dir\") returns "analysis" as output directory in this case so "child" parameter of "r chunk" has to firstly go one directory up (relPath starts with "./")
+
+    file = base::file.path("analysis", temp_file),  # a name of file that will be created
+    sep = "",
+    append = F                                      # overwrite a content of a file
+  )
+}
+
 
 generate_subdir <- function(dir = "codeRmd", file_path = NULL, commit = F) {
   ## setwd(here::here())           # set workflowr project directory as a working directory (just in case it's not set already)
@@ -56,3 +48,6 @@ generate_subdir <- function(dir = "codeRmd", file_path = NULL, commit = F) {
   workflowr::wflow_build(temp_file_path)  # generate .html files from temporary .Rmd files
   file.remove(temp_file_path)             # delete temporary .Rmd files from directory "analysis"
 }
+
+
+generate_subdir(file_path = c("subPages1/testPrint1.Rmd"), dir = "codeRmd", commit = F)
