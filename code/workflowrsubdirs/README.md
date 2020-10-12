@@ -1,7 +1,7 @@
 [workflowrsubdirs](https://github.com/LearnUseZone/workflowrSubfolders)
 ================
 LearnUseZone
-Last update: 2020-10-11 20:15 GMT+2
+Last update: 2020-10-12 12:50 GMT+2
 
   - [Purpose](#purpose)
       - [Briefly about package
@@ -87,7 +87,7 @@ Last update: 2020-10-11 20:15 GMT+2
 ## Installation
 
   - Download file “workflowrsubdirs\_0.0.0.0100.tar.gz” from
-    [GitHub](https://github.com/LearnUseZone/workflowrSubfolders/tree/dev/code).
+    [GitHub](https://github.com/LearnUseZone/workflowrSubfolders/tree/master/code).
   - Run: install.packages(path\_to\_tar.gz\_file, repos = NULL,
     type=“source”)
 
@@ -165,7 +165,7 @@ Last update: 2020-10-11 20:15 GMT+2
     git branch -a \# I prefer to check whitch branch is checked out  
     git add “.”  
     git commit -m “tested: package workflowrsubdirs”  
-    git push origin dev
+    git push origin master
   - 3c. Functions of package workflowr like:  
     workflowr::wflow\_git\_commit(c(“docs/subPages1–testPrint1.html”,
     “docs/subPages2–testPrint2.html”), “tested: package

@@ -51,7 +51,7 @@ knitr::opts_chunk$set(
 
 
 ## Installation
-- Download file "workflowrsubdirs_0.0.0.0100.tar.gz" from [GitHub](https://github.com/LearnUseZone/workflowrSubfolders/tree/dev/code).
+- Download file "workflowrsubdirs_0.0.0.0100.tar.gz" from [GitHub](https://github.com/LearnUseZone/workflowrSubfolders/tree/master/code).
 - Run: install.packages(path_to_tar.gz_file, repos = NULL, type="source")
 
 ### If there are problems with installation
@@ -95,7 +95,7 @@ You can use for this purpose e.g.:
 git branch -a       # I prefer to check whitch branch is checked out\
 git add "."\
 git commit -m "tested: package workflowrsubdirs"\
-git push origin dev
+git push origin master
 - 3c. Functions of package workflowr like:\
 workflowr::wflow_git_commit(c("docs/subPages1--testPrint1.html", "docs/subPages2--testPrint2.html"), "tested: package workflowrsubdirs with workflowr", all = TRUE)\
 workflowr::wflow_use_github("LearnUseZone", "workflowrSubfolders")  # usually choose a default option which is 2\
