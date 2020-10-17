@@ -1,3 +1,0 @@
-generate_rmd            Generate temporary .Rmd files
-generate_subdir         Render .html files from their original .Rmd
-                        files stored in subdirectories

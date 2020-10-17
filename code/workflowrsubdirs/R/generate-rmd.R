@@ -1,10 +1,7 @@
 #' @title Generate temporary .Rmd files
 #' @description
-#' This is one of functions serving as optional extension for workflowr package in order to be able to generate .html files from .Rmd files saved in subdirectories and not only in directory "analysis".
-#' \code{generate_rmd} generates .Rmd files from their original .Rmd files that are saved in subdirectories and save them into directory "analysis".
-#' These generated .Rmd files are meant to be temporary and they will be deleted after \code{\link{generate_subdir}} generates final .html files.
-#' If you want to use this function in other way than call it from \code{\link{generate_subdir}} then you have to set a correct workflowr project to be your working directory,
-#' e.g. by running: setwd("D:/Cloud/Sync/Study/Programming/R/Work/Projects/GitHub/workflowrSubfolders")
+#' It generates .Rmd files from their original .Rmd files that are saved in subdirectories and saves them into directory "analysis".
+#' These generated .Rmd files are meant to be temporary and they will be deleted at the end of function \code{\link{generate_html}} after final .html files are rendered.
 #' @param dir
 #' character (default: "codeRmd").
 #' Path to a directory, under a main workflowr subdirectory, where original Rmd files are saved.
@@ -17,19 +14,18 @@
 #' This temporary file is generated from its original Rmd file specified in path, then it will be deleted within generate.subdir.
 #' @keywords workflowr, subdirectory
 #' @return <return>
-#' @export generate_rmd
 #' @examples
 #' \dontrun{
 #'   generate_rmd("codeRmd", "subPages1/testPrint1.Rmd", "subPages1--testPrint1.Rmd")
 #' }
 
 generate_rmd <- function(dir = "codeRmd", file_path = NULL, temp_file = NULL) {
-  relPath <- base::file.path(".", dir, file_path)               # relative path to an original .Rmd file that will be rendered to .html file inside function wflow_build_dir(), "." is used for setting a correct path in parameter "child" of "r chunk" below
+  relPath <- base::file.path(".", dir, file_path)          # relative path to an original .Rmd file that will be rendered to .html file inside function wflow_build_dir(), "." is used for setting a correct path in parameter "child" of "r chunk" below
   base::cat(
     "---\n",
     yaml::as.yaml(rmarkdown::yaml_front_matter(relPath)),  # YAML header from an original .Rmd file
     "---\n\n",
-    "**Source file:** ", base::file.path(dir, file_path),       # link to original .Rmd file from workflowr subdirectory
+    "**Source file:** ", base::file.path(dir, file_path),  # link to original .Rmd file from workflowr subdirectory
     "\n\n",
 
     # r chunk code (not YAML header)

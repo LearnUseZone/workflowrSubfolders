@@ -1,6 +1,6 @@
 #' @title Render .html files from their original .Rmd files stored in subdirectories
 #' @description
-#' Similarly as for workflowr package, when specifying path to folders or files in function generate_subdir(), you can start by typing folder name, so for example, you can write "analysis" instead of "./analysis".
+#' Similarly as for workflowr package, when specifying path to folders or files in function generate_html(), you can start by typing folder name, so for example, you can write "analysis" instead of "./analysis".
 #' Processed steps:
 #' 1. Check existence of .Rmd file in a chosen subdirectory.
 #' - If it doesn't exist, inform about it and stop processing.
@@ -23,16 +23,17 @@
 #' Suggestion: Use commit = TRUE only after your original .Rmd files saved in subdirectories are tested properly and so are completely ready, otherwise you could have pointlessly many commits.
 #' @keywords workflowr, subdirectory
 #' @return <return>
-#' @export generate_subdir
+#' @export generate_html
 #' @examples
 #' \dontrun{
-#'   generate_subdir("codeRmd", c("subPages1/testPrint1.Rmd", "subPages2/testPrint2.Rmd"), T)
+#'   generate_html()
+#'   generate_html("codeRmd", c("subPages1/testPrint1.Rmd", "subPages2/testPrint2.Rmd"), T)
 #' }
 
-generate_subdir <- function(dir = "codeRmd", file_path = NULL, commit = F) {
-  base::setwd(here::here())          # set workflowr project directory as a working directory (just in case it's not set already)
+generate_html <- function(dir = "codeRmd", file_path = NULL, commit = F) {
+  base::setwd(here::here())         # set .Rproj (workflowr) project directory as a working directory (in case it was changed after opening .Rproj file)
   if (base::is.null(file_path)) {
-    file_path <- base::list.files(    # generate paths (not only file names) to .Rmd files in subdirectories under directory in parameter "dir"
+    file_path <- base::list.files(  # generate paths (not only file names) to .Rmd files in subdirectories under directory in parameter "dir"
       dir,
       recursive = T,
       include.dirs = T,

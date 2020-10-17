@@ -29,31 +29,31 @@ knitr::opts_chunk$set(
 
 ### Briefly about package functions
 - As usually, information about implemented function can be found using help (F1). Information below simply adds even more clarity.\
-- The base logic of 2 main functions generate_rmd() and generate_subdir() (see below) comes from  [here](https://github.com/jdblischak/workflowr/issues/95#issuecomment-360094662) but then they are upgraded for a better consistency with package workflowr.\
+- The base logic of 2 main functions generate_rmd() and generate_html() (see below) comes from  [here](https://github.com/jdblischak/workflowr/issues/95#issuecomment-360094662) but then they are upgraded for a better consistency with package workflowr.\
 - [Here](https://github.com/jdblischak/workflowr/issues/220) can be found my discussion of above mentioned upgrades with creator of package workflowr.
 
 #### generate_rmd()
 - It cannot be called.
-- It's only used in generate_subdir().
+- It's only used in generate_html().
 - @examples (file generate_rmd.R) are set to not run.
 - If you want to use devtools::check() also with checking @examples, then remember that this package is an extension of workflowr and in order to ensure that example not fails, it's needed
   - to have the same structure of some folders (analysis, code, codeRmd, docs) as for workflowr, or
   - to adjust code lines referencing to any path and it's not effective to do it only because of checking.
 
-#### generate_subdir()
+#### generate_html()
 - It can be called.
 - It manages process of rendering .html pages from .Rmd files from subdirectories, so this is the only one function needed to be called.
 - Rendered .html files are again prepared in folder "docs" (for GitHub) or folder "public" (for GitLab). Each such file name consists of "&#8208;&#8208;" which are delimiters for paths to original .Rmd files paths.
 - After look at workflowr button of opened .html file, under tab "Checks" can be found "R Markdown file: uncommitted changes". This is in line with workflowr package and it means that also your temporary files were committed separately, these new .html files have to be commited, too (e.g. using workflowr::wflow_git_commit())
 - If other than workflowr project is originally opened using its .Rproj file then this function fails because "base::setwd(here::here())" in this function sets a working directory to an original .Rproj working directory regardless a current working directory (e.g. set after opening .Rproj). Potentially if a relevant .Rproj working directory have the same structure then it could work but I didn't test it, yet.
-  - This type of issue can be considered when after running "workflowrsubdirs::generate_subdir()", the following error message arises in "Console" tab:
+  - This type of issue can be considered after running "workflowrsubdirs::generate_html()", the following error message arises in "Console" tab:
   Error in base::mapply(generate_rmd, dir, file_path, temp_file) : 
   zero-length inputs cannot be mixed with those of non-zero length
-    - "base::mapply(generate_rmd, dir, file_path, temp_file)" is called inside function "workflowrsubdirs::generate_subdir()".
+    - "base::mapply(generate_rmd, dir, file_path, temp_file)" is called inside function "workflowrsubdirs::generate_html()".
 
 
 ## Installation
-- Download file "workflowrsubdirs_0.0.0.0100.tar.gz" from [GitHub](https://github.com/LearnUseZone/workflowrSubfolders/tree/master/code).
+- Download file "workflowrsubdirs_0.0.0.0200.tar.gz" from [GitHub](https://github.com/LearnUseZone/workflowrSubfolders/tree/master/code).
 - Run: install.packages(path_to_tar.gz_file, repos = NULL, type="source")
 
 ### If there are problems with installation
@@ -87,10 +87,10 @@ knitr::opts_chunk$set(
 
 ### Usage of workflowrsubdirs after it’s installed from the source tar.gz file
 1. After workflowrsubdirs is installed, open your workflowr project (run .Rproj file).
-2. Use workflowrsubdirs::generate_subdir().
-  - If you downloaded my [repository](https://github.com/LearnUseZone/workflowrSubfolders), then you can test it by running an example code that you can find also in help for function "generate_subdir()":
-workflowrsubdirs::generate_subdir("codeRmd", c("subPages1/testPrint1.Rmd", "subPages2/testPrint2.Rmd"), T)
-3. Remember that although commit of temporary .Rmd files were made within function workflowrsubdirs::generate_subdir(), you still have to commit the rest of files.
+2. Use workflowrsubdirs::generate_html().
+  - If you downloaded my [repository](https://github.com/LearnUseZone/workflowrSubfolders), then you can test it by running an example code that you can find also in help for function "generate_html()":
+workflowrsubdirs::generate_html("codeRmd", c("subPages1/testPrint1.Rmd", "subPages2/testPrint2.Rmd"), T)
+3. Remember that although commit of temporary .Rmd files were made within function workflowrsubdirs::generate_html(), you still have to commit the rest of files.
 You can use for this purpose e.g.:
   - 3a. GitHub Desktop
   - 3b. Git Bash (also set as Terminal in RStudio) with git commands like:\
