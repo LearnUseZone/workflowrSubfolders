@@ -1,7 +1,7 @@
 [workflowrsubdirs](https://github.com/LearnUseZone/workflowrSubfolders)
 ================
 LearnUseZone
-Last update: 2020-10-12 12:50 GMT+2
+Last update: 2020-10-17 14:39 GMT+2
 
   - [Purpose](#purpose)
       - [Briefly about package
@@ -76,13 +76,19 @@ Last update: 2020-10-12 12:50 GMT+2
     workflowr::wflow\_git\_commit())
   - If other than workflowr project is originally opened using its
     .Rproj file then this function fails because
-      - “base::setwd(here::here())” in this function sets a working
-        directory to original .Rproj working directory so even if a
-        workflowr project working directory, within the same R session,
-        is set afterwards, it doesn’t help because the original .Rproj
-        working directory is set automatically when running
-        generate\_subdir(). Potentially if a relevant .Rproj working
-        directory have the same structure then it could work.
+    “base::setwd(here::here())” in this function sets a working
+    directory to an original .Rproj working directory regardless a
+    current working directory (e.g. set after opening .Rproj).
+    Potentially if a relevant .Rproj working directory have the same
+    structure then it could work but I didn’t test it, yet.
+      - This type of issue can be considered when after running
+        “workflowrsubdirs::generate\_subdir()”, the following error
+        message arises in “Console” tab: Error in
+        base::mapply(generate\_rmd, dir, file\_path, temp\_file) :
+        zero-length inputs cannot be mixed with those of non-zero length
+          - “base::mapply(generate\_rmd, dir, file\_path, temp\_file)”
+            is called inside function
+            “workflowrsubdirs::generate\_subdir()”.
 
 ## Installation
 
