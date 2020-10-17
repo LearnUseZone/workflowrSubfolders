@@ -32,7 +32,7 @@
 generate_subdir <- function(dir = "codeRmd", file_path = NULL, commit = F) {
   base::setwd(here::here())          # set workflowr project directory as a working directory (just in case it's not set already)
   if (base::is.null(file_path)) {
-    file_paths <- base::list.files(  # generate paths (not only file names) to .Rmd files in subdirectories under directory in parameter "dir"
+    file_path <- base::list.files(    # generate paths (not only file names) to .Rmd files in subdirectories under directory in parameter "dir"
       dir,
       recursive = T,
       include.dirs = T,
