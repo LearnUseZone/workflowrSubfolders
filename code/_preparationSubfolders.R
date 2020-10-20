@@ -2,8 +2,7 @@
 # ----
 # Initial information:
 # A solution status right after discussions in [lit 1]: (history) commit "acf04a8".
-# A better version of this solution is in package workflowrsubdirs (from commit 969c789):
-#   - https://github.com/LearnUseZone/workflowrSubfolders/blob/master/code/workflowrsubdirs/README.md
+# A better version of this solution is in package https://github.com/LearnUseZone/rpkgs/tree/master/code/workflowrsubdirs.
 
 # step 1 - ensure that index.html is already created in directory "docs" (using workflowr::wflow_build())
 #   - otherwise you can receive error like follows:
